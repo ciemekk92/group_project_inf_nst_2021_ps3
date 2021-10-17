@@ -1,12 +1,12 @@
-import express, {Request, Response} from "express";
+import express, { Request, Response } from 'express';
 
 const app = express();
 const port = 8080;
 
-app.get("/", (req: Request, res: Response) => {
-    res.send("EMA");
+app.get('/', (req: Request, res: Response) => {
+  res.send('EMA');
 });
 
 app.listen(port, () => {
-    console.log(`server started at http://localhost:${port}`);
+  console.log(`server started at http://localhost:${port}`);
 });
