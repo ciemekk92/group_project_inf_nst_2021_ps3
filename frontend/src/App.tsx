@@ -1,25 +1,37 @@
 import React from 'react';
-import logo from './logo.svg';
+import { ThemeProvider } from 'styled-components';
+import { GlobalStyles, lightTheme, darkTheme } from './themes';
+
 import './App.css';
 
 const App = (): JSX.Element => {
+  const [theme, setTheme] = React.useState('light');
+  const handleThemeChange = () => {
+    theme === 'light' ? setTheme('dark') : setTheme('light');
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
+      <GlobalStyles />
+      <div className="App">
+        <header className="App-header">
+          <button style={{ height: '30px' }} onClick={handleThemeChange}>
+            <strong>CHANGE STYLES, BITCH</strong>
+          </button>
+          <p>
+            Edit <code>src/App.tsx</code> and save to reload.
+          </p>
+          <a
+            className="App-link"
+            href="https://reactjs.org"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Learn React
+          </a>
+        </header>
+      </div>
+    </ThemeProvider>
   );
 };
 
