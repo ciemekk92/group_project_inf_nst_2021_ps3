@@ -13,10 +13,16 @@
   "author": "koksy",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "reflect-metadata": "^0.1.13",
+    "sequelize": "^6.7.0",
+    "sequelize-typescript": "^2.1.1",
+    "sqlite3": "^5.0.2"
   },
   "devDependencies": {
     "@types/express": "^4.17.13",
+    "@types/node": "^16.11.1",
+    "@types/validator": "^13.6.3",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
     "eslint": "^7.32.0",
