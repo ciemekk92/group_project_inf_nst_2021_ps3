@@ -1,10 +1,12 @@
+import { UUID } from '../../utils/Types';
+
 export class Task {
-  id!: number;
+  id!: UUID;
   description!: string;
   createdAt!: Date;
-  updatedAt!: Date;
+  updatedAt: Date;
 
-  constructor(id: number, description: string, createdAt: Date, updatedAt: Date) {
+  constructor(id: UUID, description: string, createdAt: Date, updatedAt: Date) {
     this.id = id;
     this.description = description;
     this.createdAt = createdAt;
