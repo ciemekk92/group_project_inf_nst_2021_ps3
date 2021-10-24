@@ -5,7 +5,7 @@ import { GlobalStyles, lightTheme, darkTheme } from '../themes';
 import { MainLayout } from './MainLayout';
 
 export const Main = (): JSX.Element => {
-  const [theme, setTheme] = React.useState('light');
+  const [theme, setTheme] = React.useState('dark');
   // const handleThemeChange = () => {
   //   theme === 'light' ? setTheme('dark') : setTheme('light');
   // };

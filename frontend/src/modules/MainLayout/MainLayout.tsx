@@ -1,7 +1,11 @@
 import React from 'react';
 import { Router, HashRouter, Route } from 'react-router-dom';
 
-import { history } from '../../routes/history';
+import { history, Routes } from '../../routes';
+import { AppHeader, AppSidebar, AppMainWindow } from './components';
+import { LandingPage } from '../LandingPage';
+
+import { LayoutWrapper, HorizontalWrapper } from './MainLayout.styled';
 
 export const MainLayout = (): JSX.Element => {
   const currentUser = true;
@@ -9,22 +13,25 @@ export const MainLayout = (): JSX.Element => {
     <HashRouter basename={'/'}>
       <Route
         render={(props) => (
-          <React.Fragment>
+          <LayoutWrapper>
             <AppHeader />
-            <AppSidebar />
-            <AppMainWindow>
-              <Routes {...props} />
-            </AppMainWindow>
-          </React.Fragment>
+            <HorizontalWrapper>
+              <AppSidebar />
+              <AppMainWindow>
+                <Routes {...props} />
+              </AppMainWindow>
+            </HorizontalWrapper>
+          </LayoutWrapper>
         )}
       />
     </HashRouter>
   );
 
   const renderLoggedOutView = () => (
-    <React.Fragment>
+    <LayoutWrapper>
+      <AppHeader />
       <LandingPage />
-    </React.Fragment>
+    </LayoutWrapper>
   );
 
   return (
