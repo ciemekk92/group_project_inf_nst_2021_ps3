@@ -12,7 +12,7 @@ import { DataTypes } from 'sequelize';
 import { UUID } from '../../../../utils/Types';
 
 @Table
-export class TaskModel extends Model {
+export class IssueModel extends Model {
   @PrimaryKey
   @AllowNull(false)
   @Column(DataTypes.UUIDV4)

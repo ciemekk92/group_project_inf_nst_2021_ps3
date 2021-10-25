@@ -1,6 +1,6 @@
 import { UUID } from '../../utils/Types';
 
-export class Task {
+export class Issue {
   id!: UUID;
   description!: string;
   createdAt!: Date;

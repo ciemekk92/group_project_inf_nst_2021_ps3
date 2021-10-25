@@ -29,14 +29,14 @@ describe('Project E2E tests', () => {
             createdAt: expect.any(String),
             updatedAt: expect.any(String),
             name: 'Project1',
-            tasks: [],
+            issues: [],
           },
           {
             id: expect.any(String),
             createdAt: expect.any(String),
             updatedAt: expect.any(String),
             name: 'Project2',
-            tasks: [],
+            issues: [],
           },
         ]);
       });
@@ -57,7 +57,7 @@ describe('Project E2E tests', () => {
           createdAt: createdProject[0].createdAt.toISOString(),
           updatedAt: createdProject[0].updatedAt.toISOString(),
           name: 'Test project name',
-          tasks: [],
+          issues: [],
         });
       });
   });
