@@ -1,7 +1,7 @@
 import { AllowNull, Column, HasMany, Model, PrimaryKey, Table } from 'sequelize-typescript';
 import { DataType, Sequelize, DataTypes } from 'sequelize';
-import { Task } from '../../../../domain/task/Task';
-import { TaskModel } from '../task/TaskModel';
+import { Issue } from '../../../../domain/issue/Issue';
+import { IssueModel } from '../issue/IssueModel';
 import { UUID } from '../../../../utils/Types';
 
 @Table
@@ -15,6 +15,6 @@ export class ProjectModel extends Model {
   @Column
   name!: string;
 
-  @HasMany(() => TaskModel)
-  tasks: TaskModel[] = [];
+  @HasMany(() => IssueModel)
+  issues: IssueModel[] = [];
 }

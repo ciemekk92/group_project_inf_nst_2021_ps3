@@ -1,19 +1,19 @@
-import { TaskService } from '../domain/task/TaskService';
-import { SeqTaskRepository } from './out/persistence/task/SeqTaskRepository';
+import { IssueService } from '../domain/issue/IssueService';
+import { SeqIssueRepository } from './out/persistence/issue/SeqIssueRepository';
 import { ProjectService } from '../domain/project/ProjectService';
 import { SeqProjectRepository } from './out/persistence/project/SeqProjectModelRepository';
 
 class DependencyContainer {
-  readonly taskService: TaskService;
+  readonly issueService: IssueService;
   readonly projectService: ProjectService;
 
-  constructor(taskService: TaskService, projectService: ProjectService) {
-    this.taskService = taskService;
+  constructor(issueService: IssueService, projectService: ProjectService) {
+    this.issueService = issueService;
     this.projectService = projectService;
   }
 }
 
 export const container = new DependencyContainer(
-  new TaskService(new SeqTaskRepository()),
+  new IssueService(new SeqIssueRepository()),
   new ProjectService(new SeqProjectRepository())
 );
