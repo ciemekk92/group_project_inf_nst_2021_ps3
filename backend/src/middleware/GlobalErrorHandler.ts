@@ -1,6 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import validator from 'validator';
-import { ApplicationError } from '../utils/ApplicationError';
+import { ApplicationError } from '../utils/Errors';
 
 export const globalErrorHandler = (err: Error, req: Request, res: Response, next: NextFunction) => {
   if (!err) {
@@ -10,7 +9,7 @@ export const globalErrorHandler = (err: Error, req: Request, res: Response, next
 
   if (err instanceof ApplicationError) {
     res.status(err.status);
-    res.json({ error: err.message });
+    res.json(JSON.parse(err.message));
   } else if (err instanceof SyntaxError) {
     res.status(400);
     res.json({ error: 'Cannot parse JSON' });

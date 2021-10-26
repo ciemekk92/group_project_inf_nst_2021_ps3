@@ -1,14 +1,14 @@
-import express, { Request, Response } from 'express';
+import express, { NextFunction, Request, Response } from 'express';
 import { Issue } from '../../../domain/issue/Issue';
 import { container } from '../../DependencyContainer';
 
 const router = express.Router();
 
-router.get('/', (req: Request, res: Response) => {
+router.get('/', async (req: Request, res: Response, next: NextFunction) => {
   container.issueService
     .findAll()
     .then((result: Issue[]) => res.json(result))
-    .catch((err: object) => console.error(err));
+    .catch((e) => next(e));
 });
 
 export default router;
