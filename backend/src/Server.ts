@@ -1,25 +1,30 @@
 import express, { Application } from 'express';
 import bodyParser from 'body-parser';
-import { registerControllers } from './adapter/ControllerRegistry';
+import apiControllers from './adapter/ControllerRegistry';
 import { synchronizeDatabase } from './adapter/DatabaseSynchronizer';
-import { globalErrorHandler } from './middleware/GlobalErrorHandler';
-
-const port = 8080;
+import { globalErrorHandlerMiddleware } from './middleware/GlobalErrorHandlerMiddleware';
+import { authMiddleware } from './middleware/AuthMiddleware';
+import { config } from 'dotenv';
+import cookieParser from 'cookie-parser';
 
 export const initServer = async (): Promise<Application> => {
+  config();
   const app = express();
 
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(bodyParser.json());
+  app.use(authMiddleware);
+  app.use(cookieParser());
+  app.use('/api', apiControllers);
+  app.use(globalErrorHandlerMiddleware);
 
-  registerControllers(app);
-  await synchronizeDatabase().then(() => console.log('Database synchronized.'));
+  synchronizeDatabase().then(() => console.log('Database synchronized.'));
 
-  app.use(globalErrorHandler);
   return app;
 };
 
 export const runServer = (app: Application) => {
+  const port = process.env.SERVER_PORT;
   app.listen(port, () => {
     console.log(`server started at http://localhost:${port}`);
   });

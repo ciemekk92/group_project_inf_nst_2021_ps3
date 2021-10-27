@@ -1,7 +1,12 @@
 import { NextFunction, Request, Response } from 'express';
 import { ApplicationError } from '../utils/Errors';
 
-export const globalErrorHandler = (err: Error, req: Request, res: Response, next: NextFunction) => {
+export const globalErrorHandlerMiddleware = (
+  err: Error,
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   if (!err) {
     return next(err);
   }

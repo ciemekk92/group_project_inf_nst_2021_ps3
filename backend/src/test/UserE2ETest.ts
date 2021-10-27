@@ -29,7 +29,7 @@ describe('Project E2E tests', () => {
     };
 
     await app
-      .post('/users')
+      .post('/api/users')
       .send(data)
       .expect(200)
       .then(async (response: Response) => {
@@ -65,7 +65,7 @@ describe('Project E2E tests', () => {
     );
 
     await app
-      .post('/users')
+      .post('/api/users')
       .send(data)
       .expect(400)
       .then(async (response: Response) => {
@@ -86,7 +86,7 @@ describe('Project E2E tests', () => {
     };
 
     await app
-      .post('/users')
+      .post('/api/users')
       .send(data)
       .expect(400)
       .then(async (response: Response) => {
