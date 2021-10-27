@@ -1,13 +1,24 @@
 import React from 'react';
 import { ButtonFilled } from '../../shared/ButtonFilled';
 import { ButtonOutline } from '../../shared/ButtonOutline';
+import { Container, useDialog } from '../../hooks/useDialog';
 
 export const Dashboard = (): JSX.Element => {
+  const { isOpen, handleClose, getToggleProps, getContainerProps } = useDialog();
   return (
     <div>
       To jest dashboard
-      <ButtonFilled>Filled button</ButtonFilled>
+      <ButtonFilled {...getToggleProps()}>Włoncz dajlog</ButtonFilled>
       <ButtonOutline>Outline button</ButtonOutline>
+      {isOpen && (
+        <Container {...getContainerProps()}>
+          <header>Tytuł</header>
+          <div>DZIALA!!</div>
+          <footer>
+            <ButtonOutline onClick={handleClose}>Wyłoncz</ButtonOutline>
+          </footer>
+        </Container>
+      )}
     </div>
   );
 };
