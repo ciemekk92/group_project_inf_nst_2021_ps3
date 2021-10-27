@@ -6,6 +6,10 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   borderColor?: string;
 }
 
-export const ButtonOutline = ({ children, borderColor }: Props): JSX.Element => {
-  return <StyledButtonOutline borderColor={borderColor}>{children}</StyledButtonOutline>;
+export const ButtonOutline = ({ children, borderColor, ...props }: Props): JSX.Element => {
+  return (
+    <StyledButtonOutline borderColor={borderColor} {...props}>
+      {children}
+    </StyledButtonOutline>
+  );
 };
