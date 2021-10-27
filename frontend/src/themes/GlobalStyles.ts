@@ -13,7 +13,8 @@ export const GlobalStyles = createGlobalStyle`
     body {
         background-color: ${({ theme }: Theme) => theme.primary};
         color: ${({ theme }: Theme) => theme.text};
-        transition: all 0.6s ease;
+        font-family: Lato, sans-serif;
+        transition: all 0.5s ease;
 
         & button {
             background-color: ${({ theme }: Theme) => theme.secondary};
