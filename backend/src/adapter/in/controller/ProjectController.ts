@@ -4,13 +4,13 @@ import { Project } from '../../../domain/project/Project';
 import { ProjectDto } from './ProjectDto';
 import { plainToClass } from 'class-transformer';
 import { ProjectService } from '../../../domain/project/ProjectService';
-import { jsonValidator } from '../../../middleware/JsonValidator';
+import { jsonValidatorMiddleware } from '../../../middleware/JsonValidatorMiddleware';
 
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 const projectService: ProjectService = container.projectService;
 
 router.get('/', async (req: Request, res: Response, next: NextFunction) => {
-  projectService
+  return projectService
     .findAll()
     .then((result: Project[]) => res.json(result))
     .catch((e) => next(e));
@@ -18,11 +18,11 @@ router.get('/', async (req: Request, res: Response, next: NextFunction) => {
 
 router.post(
   '/',
-  jsonValidator(ProjectDto),
+  jsonValidatorMiddleware(ProjectDto),
   async (req: Request, res: Response, next: NextFunction) => {
     const projectDto: ProjectDto = plainToClass(ProjectDto, req.body);
 
-    projectService
+    return projectService
       .save(projectDto.toCommand())
       .then((result: Project) => res.json(result))
       .catch((e) => next(e));

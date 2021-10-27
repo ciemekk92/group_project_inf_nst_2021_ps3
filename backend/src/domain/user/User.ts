@@ -1,12 +1,13 @@
 import { UUID } from '../../utils/Types';
 
 export class User {
-  id!: UUID;
-  firstName!: string;
-  lastName!: string;
-  password!: string;
-  email!: string;
-  displayName!: string;
+  id: UUID;
+  firstName: string;
+  lastName: string;
+  password: string;
+  email: string;
+  displayName: string;
+  refreshToken?: string;
 
   constructor(
     id: UUID,

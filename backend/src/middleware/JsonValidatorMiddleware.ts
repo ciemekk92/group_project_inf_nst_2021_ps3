@@ -3,7 +3,7 @@ import { validate, ValidationError } from 'class-validator';
 import { NextFunction, Request, RequestHandler, Response } from 'express';
 import { ApplicationError, AppValidationError } from '../utils/Errors';
 
-export const jsonValidator = (type: any): RequestHandler => {
+export const jsonValidatorMiddleware = (type: any): RequestHandler => {
   return (req: Request, res: Response, next: NextFunction) => {
     validate(plainToClass(type, req.body), { skipMissingProperties: true }).then(
       (errors: ValidationError[]) => {

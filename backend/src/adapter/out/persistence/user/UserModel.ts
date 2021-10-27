@@ -1,44 +1,47 @@
 import {
   AllowNull,
   Column,
-  Is,
   IsEmail,
-  IsUUID,
   Length,
   Model,
   PrimaryKey,
-  Table
+  Table,
+  Unique
 } from 'sequelize-typescript';
-import { DataTypes, validator } from 'sequelize';
+import { DataTypes } from 'sequelize';
 import { UUID } from '../../../../utils/Types';
-import { validate } from 'class-validator';
 
 @Table
 export class UserModel extends Model {
   @PrimaryKey
   @AllowNull(false)
   @Column(DataTypes.UUIDV4)
-  id!: UUID;
+  id: UUID;
 
   @AllowNull(false)
   @Column
-  firstName!: string;
+  firstName: string;
 
   @AllowNull(false)
   @Column
-  lastName!: string;
+  lastName: string;
 
   @Length({ min: 6, max: 64 })
   @AllowNull(false)
   @Column
-  password!: string;
+  password: string;
 
+  @Unique
   @IsEmail
   @AllowNull(false)
   @Column
-  email!: string;
+  email: string;
 
   @AllowNull(false)
   @Column
-  displayName!: string;
+  displayName: string;
+
+  @AllowNull(true)
+  @Column
+  refreshToken?: string;
 }
