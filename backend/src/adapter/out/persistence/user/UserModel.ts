@@ -9,7 +9,6 @@ import {
   Unique
 } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
-import { UUID } from '../../../../utils/Types';
 
 @Table
 export class UserModel extends Model {

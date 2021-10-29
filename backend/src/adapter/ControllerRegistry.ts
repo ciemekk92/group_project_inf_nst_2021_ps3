@@ -2,7 +2,7 @@ import IssuesController from './in/controller/IssueController';
 import { Router } from 'express';
 import ProjectController from './in/controller/ProjectController';
 import UserController from './in/controller/user/UserController';
-import JWTAuthController from './in/controller/auth/JWTAuthController';
+import JWTAuthController from './in/controller/auth/JwtAuthController';
 
 const app = Router();
 

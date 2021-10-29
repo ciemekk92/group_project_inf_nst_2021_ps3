@@ -1,4 +1,3 @@
-import { UUID } from '../../utils/Types';
 import { Issue } from '../issue/Issue';
 
 export class Project {

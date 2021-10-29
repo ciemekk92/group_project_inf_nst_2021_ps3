@@ -57,4 +57,16 @@ export class AuthService {
       expiresIn: expiresInSeconds
     });
   }
+
+  async refresh(userId: UUID, oldRefreshToken: string): Promise<AuthData> {
+    const user: User | undefined = await this.userRepository.findById(userId);
+    if (!user || !user.refreshToken || user.refreshToken !== oldRefreshToken) {
+      throw new ApplicationError(400, 'Access or refresh token is invalid.');
+    }
+    const authData: AuthData = await AuthService.generateAuthData(user);
+    user.refreshToken = authData.refreshToken;
+    await this.userRepository.save(user);
+
+    return authData;
+  }
 }

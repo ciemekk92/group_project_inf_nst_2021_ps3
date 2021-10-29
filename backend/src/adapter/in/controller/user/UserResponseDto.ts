@@ -1,6 +1,3 @@
-import { IsEmail, IsNotEmpty, IsString, Length } from 'class-validator';
-import { UUID } from '../../../../utils/Types';
-
 export class UserResponseDto {
   id!: UUID;
   firstName!: string;

@@ -1,5 +1,3 @@
-import { UUID } from '../../utils/Types';
-
 export class Issue {
   id!: UUID;
   description!: string;

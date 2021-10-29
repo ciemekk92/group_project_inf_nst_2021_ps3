@@ -4,7 +4,6 @@ import { CreateUserCommand } from './CreateUserCommand';
 import { ApplicationError } from '../../utils/Errors';
 import { hashPassword } from '../../adapter/BCrypt';
 import { randomUUID } from 'crypto';
-import { UUID } from '../../utils/Types';
 
 export class UserService {
   constructor(private userRepository: UserRepository) {}

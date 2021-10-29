@@ -1,6 +1,3 @@
-import { UUID } from '../../utils/Types';
-import { AllowNull, Column, IsEmail, Length } from 'sequelize-typescript';
-
 export class CreateUserCommand {
   firstName!: string;
   lastName!: string;
