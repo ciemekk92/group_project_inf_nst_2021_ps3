@@ -1,5 +1,3 @@
-import { UUID } from '../../utils/Types';
-
 export class User {
   id: UUID;
   firstName: string;
@@ -15,7 +13,8 @@ export class User {
     lastName: string,
     password: string,
     email: string,
-    displayName: string
+    displayName: string,
+    refreshToken?: string
   ) {
     this.id = id;
     this.firstName = firstName;
@@ -23,5 +22,6 @@ export class User {
     this.password = password;
     this.email = email;
     this.displayName = displayName;
+    this.refreshToken = refreshToken;
   }
 }

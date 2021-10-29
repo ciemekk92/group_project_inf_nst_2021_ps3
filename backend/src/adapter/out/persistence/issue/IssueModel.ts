@@ -5,11 +5,10 @@ import {
   ForeignKey,
   Model,
   PrimaryKey,
-  Table,
+  Table
 } from 'sequelize-typescript';
 import { ProjectModel } from '../project/ProjectModel';
 import { DataTypes } from 'sequelize';
-import { UUID } from '../../../../utils/Types';
 
 @Table
 export class IssueModel extends Model {
