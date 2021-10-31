@@ -27,4 +27,5 @@ export const SidebarListItem = styled.li`
   display: block;
   width: 20rem;
   white-space: pre-wrap;
+  margin-left: 0.8rem;
 `;

@@ -1,4 +1,7 @@
 import React from 'react';
+import { ICON_SIZE } from 'Shared/constants';
+import { IconFilled } from 'Shared/IconFilled';
+import { IconOutline } from 'Shared/IconOutline';
 
 import { SidebarBody, SidebarList, SidebarListItem } from './AppSidebar.styled';
 
@@ -6,9 +9,13 @@ export const AppSidebar = (): JSX.Element => {
   return (
     <SidebarBody>
       <SidebarList>
-        <SidebarListItem>Item 1</SidebarListItem>
+        <SidebarListItem>
+          <IconOutline iconName="dashboard" iconSize={ICON_SIZE.XLARGE} />
+        </SidebarListItem>
         <SidebarListItem>{`Item 2` + `            ` + `- z dluga nazwa`}</SidebarListItem>
-        <SidebarListItem>Item 3</SidebarListItem>
+        <SidebarListItem>
+          <IconFilled iconName="delete" />
+        </SidebarListItem>
       </SidebarList>
     </SidebarBody>
   );

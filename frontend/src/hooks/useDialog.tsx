@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { TopPortal } from '../shared/TopPortal';
+import { TopPortal } from 'Shared/TopPortal';
 
 interface ToggleProps {
   onClick?: () => void;

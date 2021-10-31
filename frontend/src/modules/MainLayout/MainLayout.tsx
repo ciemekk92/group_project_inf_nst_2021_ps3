@@ -1,7 +1,7 @@
 import React from 'react';
 import { Router, HashRouter, Route } from 'react-router-dom';
 
-import { history, Routes } from '../../routes';
+import { history, Routes } from 'Routes';
 import { AppHeader, AppSidebar, AppMainWindow } from './components';
 import { LandingPage } from '../LandingPage';
 

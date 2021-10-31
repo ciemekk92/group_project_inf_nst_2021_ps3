@@ -1,0 +1,1 @@
+export { IconFilled } from './IconFilled';
