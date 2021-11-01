@@ -6,6 +6,8 @@ import { AppHeader, AppSidebar, AppMainWindow } from './components';
 import { LandingPage } from '../LandingPage';
 
 import { LayoutWrapper, HorizontalWrapper } from './MainLayout.styled';
+import { TextInput } from 'shared/TextInput/TextInput';
+import { TEXT_SIZE } from 'shared/constants';
 
 export const MainLayout = (): JSX.Element => {
   const currentUser = true;
@@ -18,6 +20,7 @@ export const MainLayout = (): JSX.Element => {
             <HorizontalWrapper>
               <AppSidebar />
               <AppMainWindow>
+
                 <Routes {...props} />
               </AppMainWindow>
             </HorizontalWrapper>

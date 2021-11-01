@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { TopPortal } from 'Shared/TopPortal';
+import { TopPortal } from 'shared/TopPortal';
 
 interface ToggleProps {
   onClick?: () => void;
@@ -14,8 +14,8 @@ interface ContainerProps extends React.HTMLAttributes<HTMLDivElement> {
 const stopPropagation = (event: React.SyntheticEvent) => event.stopPropagation();
 const callAll =
   (...callbacks: Function[]) =>
-  (...args: any[]) =>
-    callbacks.forEach((callback) => callback && callback(...args));
+    (...args: any[]) =>
+      callbacks.forEach((callback) => callback && callback(...args));
 
 export const useDialog = () => {
   const [isOpen, setIsOpen] = React.useState<boolean>(false);

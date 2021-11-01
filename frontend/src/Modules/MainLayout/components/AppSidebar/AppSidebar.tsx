@@ -1,7 +1,7 @@
 import React from 'react';
-import { ICON_SIZE } from 'Shared/constants';
-import { IconFilled } from 'Shared/IconFilled';
-import { IconOutline } from 'Shared/IconOutline';
+import { ICON_SIZE } from 'shared/constants';
+import { IconFilled } from 'shared/IconFilled';
+import { IconOutline } from 'shared/IconOutline';
 
 import { SidebarBody, SidebarList, SidebarListItem } from './AppSidebar.styled';
 
