@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import { ICON_SIZE } from 'shared/constants';
+import { ICON_SIZE } from 'Shared/constants';
 
 interface Props extends React.HTMLAttributes<HTMLSpanElement> {
   iconName: string;

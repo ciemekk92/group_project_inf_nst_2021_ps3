@@ -1,6 +1,6 @@
 import React from 'react';
-import { ButtonFilled } from 'shared/ButtonFilled';
-import { ButtonOutline } from 'shared/ButtonOutline';
+import { ButtonFilled } from 'Shared/ButtonFilled';
+import { ButtonOutline } from 'Shared/ButtonOutline';
 import { Container, useDialog } from 'Hooks/useDialog';
 
 export const Dashboard = (): JSX.Element => {
