@@ -1,8 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons+Outlined');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
 @font-face {
   font-family: 'Distant Galaxy';
-  src: url('assets/fonts/DistantGalaxy.ttf') format('truetype');
+  src: url('Assets/fonts/DistantGalaxy.ttf') format('truetype');
 }
 
 *,

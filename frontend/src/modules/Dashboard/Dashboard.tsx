@@ -1,7 +1,7 @@
 import React from 'react';
-import { ButtonFilled } from '../../shared/ButtonFilled';
-import { ButtonOutline } from '../../shared/ButtonOutline';
-import { Container, useDialog } from '../../hooks/useDialog';
+import { ButtonFilled } from 'Shared/ButtonFilled';
+import { ButtonOutline } from 'Shared/ButtonOutline';
+import { Container, useDialog } from 'Hooks/useDialog';
 
 export const Dashboard = (): JSX.Element => {
   const { isOpen, handleClose, getToggleProps, getContainerProps } = useDialog();
