@@ -4,7 +4,7 @@ export const SidebarBody = styled.div`
   display: flex;
   flex-direction: column;
   position: fixed;
-  background-color: ${(props) => props.theme.secondary};
+  background-color: ${(props) => props.theme.primary};
   padding: 1rem;
   width: 6rem;
   height: 100%;

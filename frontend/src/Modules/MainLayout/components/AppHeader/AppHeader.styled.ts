@@ -15,7 +15,7 @@ export const HeaderBody = styled.nav`
     font-size: 3.6rem;
     padding: 0 2rem;
     text-shadow: 0.1rem 0.3rem 0.5rem rgba(0, 0, 0, 0.4);
-    cursor: default;
+    cursor: pointer;
     user-select: none;
   }
 `;

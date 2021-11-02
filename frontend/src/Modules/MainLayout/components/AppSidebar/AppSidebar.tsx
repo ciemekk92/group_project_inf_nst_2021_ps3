@@ -10,7 +10,7 @@ export const AppSidebar = (): JSX.Element => {
     <SidebarBody>
       <SidebarList>
         <SidebarListItem>
-          <IconOutline iconName="dashboard" iconSize={ICON_SIZE.XLARGE} />
+          <IconOutline iconName="dashboard" iconSize={ICON_SIZE.XL} />
         </SidebarListItem>
         <SidebarListItem>{`Item 2` + `            ` + `- z dluga nazwa`}</SidebarListItem>
         <SidebarListItem>

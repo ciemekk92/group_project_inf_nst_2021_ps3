@@ -11,14 +11,12 @@ interface Theme {
 
 export const GlobalStyles = createGlobalStyle`
     body {
-        background-color: ${({ theme }: Theme) => theme.primary};
+        background-color: ${({ theme }: Theme) => theme.secondary};
         color: ${({ theme }: Theme) => theme.text};
         font-family: Lato, sans-serif;
-
+        
         & button {
-            background-color: ${({ theme }: Theme) => theme.secondary};
-            border: 3px solid ${({ theme }: Theme) => theme.accent};
-            border-radius: 3px;
+          font-size: 1.2rem;
         }
 
         & .material-icons.md-18,
@@ -39,6 +37,11 @@ export const GlobalStyles = createGlobalStyle`
         & .material-icons.md-48,
         & .material-icons-outlined.md-48 {
           font-size: 4.8rem;
+        }
+        
+        & .material-icons.md-96,
+        & .material-icons-outlined.md-96 {
+          font-size: 9.6rem;
         }
     }
 `;
