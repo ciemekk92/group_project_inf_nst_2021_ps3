@@ -19,6 +19,6 @@ export const StyledButtonFilled = styled.button<Props>`
   backface-visibility: visible;
 
   &:hover {
-    transform: translateY(-0.2rem);
+    background-color: ${(props) => props.theme.accentLight};
   }
 `;
