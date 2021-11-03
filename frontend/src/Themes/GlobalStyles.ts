@@ -9,10 +9,16 @@ interface Theme {
   };
 }
 
-export const GlobalStyles = createGlobalStyle`
+interface Props {
+  readonly themeType: string;
+}
+
+export const GlobalStyles = createGlobalStyle<Props & Theme>`
     body {
-        background-color: ${({ theme }: Theme) => theme.secondary};
-        color: ${({ theme }: Theme) => theme.text};
+        background-image: url(${(props) =>
+          props.themeType === 'light' ? '/bg_light.svg' : '/bg_dark.svg'});
+        background-size: 100%, 6%;
+        color: ${(props) => props.theme.text};
         font-family: Lato, sans-serif;
         
         & button {

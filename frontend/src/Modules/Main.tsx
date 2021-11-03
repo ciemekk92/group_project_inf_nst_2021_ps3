@@ -12,7 +12,7 @@ export const Main = (): JSX.Element => {
 
   return (
     <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
-      <GlobalStyles />
+      <GlobalStyles themeType={theme} />
       <MainLayout />
     </ThemeProvider>
   );
