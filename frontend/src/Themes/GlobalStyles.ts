@@ -9,16 +9,20 @@ interface Theme {
   };
 }
 
-export const GlobalStyles = createGlobalStyle`
-    body {
-        background-color: ${({ theme }: Theme) => theme.primary};
-        color: ${({ theme }: Theme) => theme.text};
-        font-family: Lato, sans-serif;
+interface Props {
+  readonly themeType: string;
+}
 
+export const GlobalStyles = createGlobalStyle<Props & Theme>`
+    body {
+        background-image: url(${(props) =>
+          props.themeType === 'light' ? '/bg_light.svg' : '/bg_dark.svg'});
+        background-size: 100%, 6%;
+        color: ${(props) => props.theme.text};
+        font-family: Lato, sans-serif;
+        
         & button {
-            background-color: ${({ theme }: Theme) => theme.secondary};
-            border: 3px solid ${({ theme }: Theme) => theme.accent};
-            border-radius: 3px;
+          font-size: 1.2rem;
         }
 
         & .material-icons.md-18,
@@ -39,6 +43,11 @@ export const GlobalStyles = createGlobalStyle`
         & .material-icons.md-48,
         & .material-icons-outlined.md-48 {
           font-size: 4.8rem;
+        }
+        
+        & .material-icons.md-96,
+        & .material-icons-outlined.md-96 {
+          font-size: 9.6rem;
         }
     }
 `;

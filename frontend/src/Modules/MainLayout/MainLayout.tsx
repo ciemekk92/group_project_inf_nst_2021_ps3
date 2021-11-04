@@ -8,7 +8,10 @@ import { LandingPage } from '../LandingPage';
 import { LayoutWrapper, HorizontalWrapper } from './MainLayout.styled';
 
 export const MainLayout = (): JSX.Element => {
-  const currentUser = true;
+  const [currentUser, setCurrentUser] = React.useState<boolean>(false);
+
+  const handleUserChange = () => setCurrentUser(!currentUser);
+
   const renderLoggedInView = () => (
     <HashRouter basename={'/'}>
       <Route
@@ -30,7 +33,7 @@ export const MainLayout = (): JSX.Element => {
   const renderLoggedOutView = () => (
     <LayoutWrapper>
       <AppHeader />
-      <LandingPage />
+      <LandingPage handleUserChange={handleUserChange} />
     </LayoutWrapper>
   );
 

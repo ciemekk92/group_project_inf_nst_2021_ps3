@@ -16,7 +16,8 @@ export const IconFilled = ({
     'md-18': iconSize === ICON_SIZE.SMALL,
     'md-24': iconSize === ICON_SIZE.MEDIUM,
     'md-36': iconSize === ICON_SIZE.LARGE,
-    'md-48': iconSize === ICON_SIZE.XLARGE
+    'md-48': iconSize === ICON_SIZE.XL,
+    'md-96': iconSize === ICON_SIZE.XXL
   });
 
   return (

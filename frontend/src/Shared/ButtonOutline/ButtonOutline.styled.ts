@@ -8,4 +8,8 @@ interface Props {
 export const StyledButtonOutline = styled(StyledButtonFilled)<Props>`
   background-color: transparent;
   border: 2px solid ${(props) => props.theme.accent};
+
+  &:hover {
+    border-color: ${(props) => props.theme.accentLight};
+  }
 `;
