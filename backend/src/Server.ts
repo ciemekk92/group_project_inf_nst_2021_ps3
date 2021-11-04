@@ -13,7 +13,7 @@ export const initServer = async (): Promise<Application> => {
   const app = express();
   app.use(
     cors({
-      origin: ['localhost:3000']
+      origin: [process.env.FRONTEND_DEV_SERVER]
     })
   );
   app.use(express.urlencoded({ extended: false }));
