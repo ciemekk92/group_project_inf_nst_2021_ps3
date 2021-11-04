@@ -4,7 +4,7 @@ Backend application written in node.js, Express and Typescript
 
 ## Requirements
 
-- Install Node.js 14.18.1 LTS
+- Install Node.js 16.13.0 LTS
 
 ## Application building
 
