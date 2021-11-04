@@ -12,6 +12,9 @@
     "test": "jest",
     "test:watch": "jest --watch"
   },
+  "engines": {
+    "node": ">16.0.0"
+  },
   "keywords": [],
   "author": "koksy",
   "license": "ISC",
