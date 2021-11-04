@@ -28,6 +28,10 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "start-backend-dev": "cd ../backend && npm run start-backend-dev",
+    "build-backend": "cd ../backend && npm run build-backend",
+    "build-prod": "npm run build && npm run build-backend",
+    "start-prod": "npm run build-prod && cd ../backend && node dist/app.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
