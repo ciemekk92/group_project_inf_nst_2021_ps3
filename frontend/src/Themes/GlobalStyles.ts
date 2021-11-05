@@ -38,7 +38,7 @@ export const GlobalStyles = createGlobalStyle`
         
         & .material-icons.md-48,
         & .material-icons-outlined.md-48 {
-          font-size: 4.8rem; 
+          font-size: 4.8rem;
         }
     }
 

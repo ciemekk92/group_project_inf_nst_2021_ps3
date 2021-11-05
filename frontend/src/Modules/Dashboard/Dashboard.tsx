@@ -14,7 +14,6 @@ export const Dashboard = (): JSX.Element => {
       To jest dashboard
       <ButtonFilled {...getToggleProps()}>Włoncz dajlog</ButtonFilled>
       <ButtonOutline>Outline button</ButtonOutline>
-      <br />
       <TextInput value={value} onChange={onChange} />
       {isOpen && (
         <Container {...getContainerProps()}>
