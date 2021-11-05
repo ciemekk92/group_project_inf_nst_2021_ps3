@@ -40,26 +40,10 @@ export const GlobalStyles = createGlobalStyle`
         & .material-icons-outlined.md-48 {
           font-size: 4.8rem; 
         }
+    }
 
-        & .material-text {
-          border: 1px solid #ced4da;
-          border-radius: 0.50rem;
-          padding: 0.375rem 0.75 rem;
-          display: block;
-        
-    
-        }
-        & .material-text.md-18 {
-          font-size: 1.8rem;
-        }
-        & .material-text.md-24 {
-          font-size: 2.4rem;
-        }
-        & .material-text.md-36 {
-          font-size: 3.6rem;
-        }
-        & .material-text.md-48 {
-          font-size: 4.8rem;
-        }
+    input,
+    button {
+      font-family: Lato, sans-serif;
     }
 `;
