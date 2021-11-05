@@ -50,4 +50,9 @@ export const GlobalStyles = createGlobalStyle<Props & Theme>`
           font-size: 9.6rem;
         }
     }
+
+    input,
+    button {
+      font-family: Lato, sans-serif;
+    }
 `;
