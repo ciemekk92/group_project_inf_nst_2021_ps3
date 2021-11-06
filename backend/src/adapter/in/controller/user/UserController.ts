@@ -4,8 +4,6 @@ import { UserService } from '../../../../domain/user/UserService';
 import { jsonValidatorMiddleware } from '../../../../middleware/JsonValidatorMiddleware';
 import { plainToClass } from 'class-transformer';
 import { UserDto } from './UserDto';
-import { User } from '../../../../domain/user/User';
-import { UserResponseDto } from './UserResponseDto';
 
 export const router = express.Router();
 const userService: UserService = container.userService;
@@ -17,18 +15,8 @@ router.post(
     const userDto: UserDto = plainToClass(UserDto, req.body);
 
     return userService
-      .save(userDto.toCommand())
-      .then((result: User) =>
-        res.json(
-          new UserResponseDto(
-            result.id,
-            result.firstName,
-            result.lastName,
-            result.email,
-            result.displayName
-          )
-        )
-      )
+      .save(userDto.email, userDto.password)
+      .then(() => res.status(201).send())
       .catch((e) => next(e));
   }
 );

@@ -2,14 +2,16 @@ import { UserRepository } from '../../../../domain/user/UserRepository';
 import { User } from '../../../../domain/user/User';
 import { UserModel } from './UserModel';
 import { Op } from 'sequelize';
+import { userToDomain } from './UserMapper';
 
 export class SeqUserRepository implements UserRepository {
   async save({
     id,
-    firstName,
-    lastName,
-    password,
     email,
+    password,
+    firstName,
+    active,
+    lastName,
     displayName,
     refreshToken
   }: User): Promise<User> {
@@ -21,10 +23,21 @@ export class SeqUserRepository implements UserRepository {
       foundUser.email = email;
       foundUser.displayName = displayName;
       foundUser.refreshToken = refreshToken;
-      return await foundUser.save();
+      return foundUser.save().then((u) => userToDomain(u));
     }
 
-    return new UserModel({ id, firstName, lastName, password, email, displayName }).save();
+    return new UserModel({
+      id,
+      email,
+      password,
+      firstName,
+      active,
+      lastName,
+      displayName,
+      refreshToken
+    })
+      .save()
+      .then((u) => userToDomain(u));
   }
 
   async findByEmail(email: string): Promise<User | undefined> {
@@ -34,10 +47,10 @@ export class SeqUserRepository implements UserRepository {
           [Op.like]: '%' + email + '%'
         }
       }
-    });
+    }).then((u) => (!!u ? userToDomain(u) : undefined));
   }
 
   async findById(id: UUID): Promise<User | undefined> {
-    return UserModel.findByPk(id);
+    return UserModel.findByPk(id).then((u) => userToDomain(u));
   }
 }

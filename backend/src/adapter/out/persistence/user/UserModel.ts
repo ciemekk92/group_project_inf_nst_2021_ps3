@@ -17,14 +17,6 @@ export class UserModel extends Model {
   @Column(DataTypes.UUIDV4)
   id: UUID;
 
-  @AllowNull(false)
-  @Column
-  firstName: string;
-
-  @AllowNull(false)
-  @Column
-  lastName: string;
-
   @Length({ min: 6, max: 64 })
   @AllowNull(false)
   @Column
@@ -37,6 +29,18 @@ export class UserModel extends Model {
   email: string;
 
   @AllowNull(false)
+  @Column
+  active: boolean;
+
+  @AllowNull(true)
+  @Column
+  firstName: string;
+
+  @AllowNull(true)
+  @Column
+  lastName: string;
+
+  @AllowNull(true)
   @Column
   displayName: string;
 
