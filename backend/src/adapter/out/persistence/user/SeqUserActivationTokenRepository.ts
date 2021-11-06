@@ -8,4 +8,12 @@ export class SeqUserActivationTokenRepository implements UserActivationTokenRepo
       .save()
       .then((t) => new UserActivationToken(userId, value));
   }
+
+  async findByValue(value: string): Promise<UserActivationToken | null> {
+    return UserActivationTokenModel.findOne({
+      where: {
+        value: value
+      }
+    }).then((m) => (m ? new UserActivationToken(m.userId, m.value) : null));
+  }
 }

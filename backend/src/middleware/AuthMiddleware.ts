@@ -7,6 +7,10 @@ const permittedEndpoints = [
     method: 'POST'
   },
   {
+    path: '/api/users/activate*',
+    method: 'PUT'
+  },
+  {
     path: '/api/auth/login',
     method: 'POST'
   }
@@ -18,7 +22,14 @@ const returnUnauthorized = (res: Response): Response => {
 
 const requestToPermittedEndpoint = (req: Request): boolean => {
   const permittedPath: boolean =
-    permittedEndpoints.find((endpoint) => endpoint.path === req.url) !== undefined;
+    permittedEndpoints.find((endpoint) => {
+      if (endpoint.path.endsWith('*')) {
+        const withoutAsterisk: string = endpoint.path.slice(0, -1);
+        return endpoint.path.includes(withoutAsterisk);
+      } else {
+        return endpoint.path === req.url;
+      }
+    }) !== undefined;
 
   if (!permittedPath) {
     return false;

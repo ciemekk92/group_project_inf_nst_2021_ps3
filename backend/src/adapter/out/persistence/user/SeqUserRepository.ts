@@ -9,18 +9,20 @@ export class SeqUserRepository implements UserRepository {
     id,
     email,
     password,
-    firstName,
     active,
+    firstName,
     lastName,
     displayName,
     refreshToken
   }: User): Promise<User> {
     const foundUser = await UserModel.findByPk(id);
     if (foundUser) {
+      foundUser.id = id;
+      foundUser.email = email;
+      foundUser.password = password;
+      foundUser.active = active;
       foundUser.firstName = firstName;
       foundUser.lastName = lastName;
-      foundUser.password = password;
-      foundUser.email = email;
       foundUser.displayName = displayName;
       foundUser.refreshToken = refreshToken;
       return foundUser.save().then((u) => userToDomain(u));
@@ -40,14 +42,15 @@ export class SeqUserRepository implements UserRepository {
       .then((u) => userToDomain(u));
   }
 
-  async findByEmail(email: string): Promise<User | undefined> {
+  async findActiveByEmail(email: string): Promise<User | undefined> {
     return UserModel.findOne({
       where: {
         email: {
           [Op.like]: '%' + email + '%'
-        }
+        },
+        active: true
       }
-    }).then((u) => (!!u ? userToDomain(u) : undefined));
+    }).then((u) => (u ? userToDomain(u) : undefined));
   }
 
   async findById(id: UUID): Promise<User | undefined> {
