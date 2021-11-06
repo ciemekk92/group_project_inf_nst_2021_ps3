@@ -1,19 +1,18 @@
-# "PROJECT_NAME"
+# "Boardel"
 
 Backend application written in node.js, Express and Typescript
 
-## Requirements
+## Prerequisites
 
 - Install Node.js 16.13.0 LTS
-
-## Application building
-
-- "npm install" - in terminal, use this command to build project
+- Type "npm install" to install all necessary packages
 
 ## Application running
 
-### Commands that allows to run project on localhost on 8080 port.
+#### Run project on localhost.
 
-- "npm start" - server with auto refreshing on changes detection (type it in root directory)
-- "nodemon" -same as above
-- "node ."
+"npm run start-dev" - starts server at port in .env with auto refreshing. (default is 8080)
+
+#### Run project on production.
+
+"npm run start-prod" - starts server at port in .env with auto refreshing. (default is 8080)

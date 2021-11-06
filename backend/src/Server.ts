@@ -26,7 +26,7 @@ export const initServer = async (): Promise<Application> => {
 };
 
 export const runServer = (app: Application) => {
-  const port = process.env.SERVER_PORT;
+  const port: number = parseInt(process.env.SERVER_PORT) || 8080;
 
   app.listen(port, () => {
     console.log(`server started at http://localhost:${port}`);

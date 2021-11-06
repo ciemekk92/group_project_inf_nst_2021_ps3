@@ -8,6 +8,8 @@ import { getRandomUUID } from '../../utils/Globalo';
 import { Email } from '../email/Email';
 import { getUserRegistrationContent } from '../email/EmailContentCreator';
 import { EmailSender } from '../email/EmailSender';
+import { AuthService } from './AuthService';
+import { AuthData } from './AuthData';
 
 export class UserService {
   constructor(
@@ -17,8 +19,8 @@ export class UserService {
   ) {}
 
   async save(email: string, password: string): Promise<void> {
-    const existingUser: User | undefined = await this.userRepository.findByEmail(email);
-    if (existingUser) {
+    const existingActiveUser: User | undefined = await this.userRepository.findActiveByEmail(email);
+    if (existingActiveUser) {
       throw new ApplicationError(400, 'User with given email already exists.');
     }
 
@@ -35,5 +37,21 @@ export class UserService {
       'Boardel registration ☺',
       getUserRegistrationContent(process.env.FRONTEND_DEV_SERVER, token.value)
     ).send(this.emailSender);
+  }
+
+  async activateUser(token: UUID): Promise<AuthData> {
+    const foundToken: UserActivationToken | null =
+      await this.userActivationTokenRepository.findByValue(token);
+    if (!foundToken) {
+      throw new ApplicationError(404, 'Token not found');
+    }
+    const user: User | null = await this.userRepository.findById(foundToken.userId);
+    if (!user) {
+      throw new ApplicationError(404, 'User not found');
+    }
+    user.active = true;
+    await this.userRepository.save(user);
+
+    return AuthService.generateAuthData(user);
   }
 }

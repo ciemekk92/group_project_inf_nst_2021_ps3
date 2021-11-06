@@ -17,7 +17,7 @@ export class AuthService {
     );
   }
 
-  private static async generateAuthData(user: User): Promise<AuthData> {
+  static async generateAuthData(user: User): Promise<AuthData> {
     const payload = { id: user.id };
 
     return new AuthData(
@@ -37,7 +37,7 @@ export class AuthService {
   }
 
   async login(email: string, plainPassword: string): Promise<AuthData> {
-    const user: User | undefined = await this.userRepository.findByEmail(email);
+    const user: User | undefined = await this.userRepository.findActiveByEmail(email);
     if (user && (await passwordMatches(plainPassword, user.password))) {
       const authData: AuthData = await AuthService.generateAuthData(user);
       user.refreshToken = authData.refreshToken;

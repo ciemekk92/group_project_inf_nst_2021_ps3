@@ -23,3 +23,9 @@ export const globalErrorHandlerMiddleware = (
     res.json({ error: 'Unknown error' });
   }
 };
+
+export const catchAsyncErrors = (fn: any) => {
+  return (req: Request, res: Response, next: NextFunction) => {
+    fn(req, res, next).catch((err: any) => next(err));
+  };
+};

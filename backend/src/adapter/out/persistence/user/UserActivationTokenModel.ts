@@ -1,13 +1,13 @@
-import { AllowNull, Column, Model, Table, Unique } from 'sequelize-typescript';
+import { AllowNull, Column, Model, PrimaryKey, Table } from 'sequelize-typescript';
 
 @Table
 export class UserActivationTokenModel extends Model {
-  @Unique
+  @PrimaryKey
   @AllowNull(false)
   @Column
   userId: UUID;
 
-  @Unique
+  @PrimaryKey
   @AllowNull(false)
   @Column
   value: UUID;

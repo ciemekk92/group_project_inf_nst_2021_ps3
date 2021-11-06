@@ -1,13 +1,4 @@
-import {
-  AllowNull,
-  Column,
-  IsEmail,
-  Length,
-  Model,
-  PrimaryKey,
-  Table,
-  Unique
-} from 'sequelize-typescript';
+import { AllowNull, Column, IsEmail, Length, Model, PrimaryKey, Table } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 
 @Table
@@ -22,7 +13,6 @@ export class UserModel extends Model {
   @Column
   password: string;
 
-  @Unique
   @IsEmail
   @AllowNull(false)
   @Column

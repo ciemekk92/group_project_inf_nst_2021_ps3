@@ -1,45 +1,47 @@
-import express, { CookieOptions, NextFunction, Request, Response } from 'express';
+import express, { CookieOptions, Request, Response } from 'express';
 import { container } from '../../../DependencyContainer';
 import { jsonValidatorMiddleware } from '../../../../middleware/JsonValidatorMiddleware';
 import { CredentialsDto } from './CredentialsDto';
 import { AuthData } from '../../../../domain/user/AuthData';
 import { ApplicationError } from '../../../../utils/Errors';
 import { extractUserId } from '../JwtTokenExtractor';
+import { catchAsyncErrors } from '../../../../middleware/GlobalErrorHandlerMiddleware';
 
 const router = express.Router();
 
 router.post(
   '/login',
   jsonValidatorMiddleware(CredentialsDto),
-  (req: Request, res: Response, next: NextFunction) => {
+  catchAsyncErrors(async (req: Request, res: Response) => {
     return container.authService
       .login(req.body.email, req.body.password)
       .then((result: AuthData) => {
         res
           .cookie('refreshToken', result.refreshToken, getCookieOptions())
           .json({ accessToken: result.accessToken });
-      })
-      .catch((e) => next(e));
-  }
+      });
+  })
 );
 
-router.post('/refresh-token', (req: Request, res: Response, next: NextFunction) => {
-  const refreshToken: string | undefined = req.cookies.refreshToken;
-  if (!refreshToken) {
-    throw new ApplicationError(401, 'Missing refresh token.');
-  }
+router.post(
+  '/refresh-token',
+  catchAsyncErrors(async (req: Request, res: Response) => {
+    const refreshToken: string | undefined = req.cookies.refreshToken;
+    if (!refreshToken) {
+      throw new ApplicationError(401, 'Missing refresh token.');
+    }
 
-  return container.authService
-    .refresh(extractUserId(req), refreshToken)
-    .then((result: AuthData) => {
-      res
-        .cookie('refreshToken', result.refreshToken, getCookieOptions())
-        .json({ accessToken: result.accessToken });
-    })
-    .catch((e) => next(e));
-});
+    return container.authService
+      .refresh(extractUserId(req), refreshToken)
+      .then((result: AuthData) => {
+        res
+          .cookie('refreshToken', result.refreshToken, getCookieOptions())
+          .json({ accessToken: result.accessToken });
+      });
+  })
+);
 
-const getCookieOptions = (): CookieOptions => {
+export const getCookieOptions = (): CookieOptions => {
   return {
     expires: new Date(Date.now() + parseInt(process.env.REFRESH_TOKEN_LIFE_SECONDS) * 1000),
     // secure: true, TODO
