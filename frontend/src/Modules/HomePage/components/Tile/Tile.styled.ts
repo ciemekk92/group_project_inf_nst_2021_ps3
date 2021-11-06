@@ -2,6 +2,8 @@ import styled from 'styled-components';
 
 export const TileContainer = styled.div`
   display: flex;
+  width: 16rem;
+  height: 16rem;
   flex-direction: column;
   align-items: center;
   padding: 1.5rem 2rem;
@@ -19,7 +21,8 @@ export const TileContainer = styled.div`
   }
 
   & p {
+    margin-top: 1.6rem;
     opacity: 1;
-    font-size: 1.3rem;
+    font-size: 1.8rem;
   }
 `;

@@ -4,17 +4,18 @@ export const SidebarBody = styled.div`
   display: flex;
   flex-direction: column;
   position: fixed;
-  background-color: ${(props) => props.theme.primary};
-  padding: 1rem;
-  width: 6rem;
+  background-color: ${(props) => props.theme.primaryTransparent};
+  padding: 1rem 0;
+  width: 7.2rem;
   height: 100%;
   overflow: hidden;
   z-index: 1000;
-  transition: width 0.3s ease;
+  transition: all 0.3s ease;
 
   &:hover {
-    width: 20rem;
+    width: 24rem;
     overflow: visible;
+    background-color: ${(props) => props.theme.primary};
   }
 `;
 

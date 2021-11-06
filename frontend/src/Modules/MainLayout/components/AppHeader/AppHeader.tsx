@@ -9,6 +9,11 @@ export const AppHeader = (): JSX.Element => {
       <StyledLink to="/" replace>
         <h1>BOARDEL</h1>
       </StyledLink>
+      <div style={{ display: 'flex', marginLeft: 'auto' }}>
+        <p>Profil</p>
+        <p>Wiadomosci</p>
+        <p>Powiadomienia</p>
+      </div>
     </HeaderBody>
   );
 };
