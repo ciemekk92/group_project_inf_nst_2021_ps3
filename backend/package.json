@@ -7,7 +7,7 @@
     "build-frontend": "cd ../frontend && npm run build",
     "build-backend": "tsc",
     "build-prod": "npm run build-frontend && npm run build-backend",
-    "start-backend-dev": "nodemon src/App.ts",
+    "start-backend-dev": "nodemon --exec \"npx ts-node --project ./tsconfig.json --files\" src/App.ts",
     "start-prod": "node dist/app.js",
     "test": "jest",
     "test:watch": "jest --watch"
