@@ -5,11 +5,15 @@ import { hashPassword } from '../../adapter/BCrypt';
 import { UserActivationTokenRepository } from './UserActivationTokenRepository';
 import { UserActivationToken } from './UserActivationToken';
 import { getRandomUUID } from '../../utils/Globalo';
+import { Email } from '../email/Email';
+import { getUserRegistrationContent } from '../email/EmailContentCreator';
+import { EmailSender } from '../email/EmailSender';
 
 export class UserService {
   constructor(
     private userRepository: UserRepository,
-    private userActivationTokenRepository: UserActivationTokenRepository
+    private userActivationTokenRepository: UserActivationTokenRepository,
+    private emailSender: EmailSender
   ) {}
 
   async save(email: string, password: string): Promise<void> {
@@ -25,5 +29,11 @@ export class UserService {
     const token = await this.userActivationTokenRepository.save(
       new UserActivationToken(userId, getRandomUUID())
     );
+
+    await new Email(
+      email,
+      'Boardel registration ☺',
+      getUserRegistrationContent(process.env.FRONTEND_DEV_SERVER, token.value)
+    ).send(this.emailSender);
   }
 }
