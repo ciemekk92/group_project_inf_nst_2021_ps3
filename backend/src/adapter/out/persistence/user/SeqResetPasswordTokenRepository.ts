@@ -1,6 +1,7 @@
 import { ResetPasswordToken } from '../../../../domain/user/ResetPasswordToken';
 import { ResetPasswordTokenRepository } from '../../../../domain/user/ResetPasswordTokenRepository';
 import { ResetPasswordTokenModel } from './ResetPasswordTokenModel';
+import { UserModel } from './UserModel';
 
 export class SeqResetPasswordTokenRepository implements ResetPasswordTokenRepository {
   async save({ user, value }: ResetPasswordToken): Promise<ResetPasswordToken> {
@@ -11,6 +12,7 @@ export class SeqResetPasswordTokenRepository implements ResetPasswordTokenReposi
 
   async findByValue(value: string): Promise<ResetPasswordToken | null> {
     return ResetPasswordTokenModel.findOne({
+      include: [UserModel],
       where: {
         value: value
       }
