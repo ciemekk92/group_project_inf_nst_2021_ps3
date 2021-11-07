@@ -10,6 +10,7 @@ import validator from 'validator';
 import { AuthData } from '../../../../domain/user/AuthData';
 import { getCookieOptions } from '../auth/JwtAuthController';
 import { ResetPasswordDto } from './ResetPasswordDto';
+import { SetNewPasswordDto } from './SetNewPasswordDto';
 import isUUID = validator.isUUID;
 
 export const router = express.Router();
@@ -45,6 +46,22 @@ router.put(
   jsonValidatorMiddleware(ResetPasswordDto),
   catchAsyncErrors(async (req: Request, res: Response) => {
     return container.userService.resetPassword(req.body.email).then(() => res.status(204).send());
+  })
+);
+
+router.put(
+  '/set-new-password/:token',
+  jsonValidatorMiddleware(SetNewPasswordDto),
+  catchAsyncErrors(async (req: Request, res: Response) => {
+    const token: string = req.params.token;
+
+    if (!isUUID(token, 4)) {
+      throw new ApplicationError(400, 'Valid token is required');
+    }
+
+    return container.userService
+      .setNewPassword(token, req.body.password)
+      .then(() => res.status(204).send());
   })
 );
 

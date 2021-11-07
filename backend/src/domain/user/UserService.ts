@@ -72,4 +72,15 @@ export class UserService {
       ).send(this.emailSender);
     }
   }
+
+  async setNewPassword(token: string, password: string): Promise<void> {
+    const foundToken: ResetPasswordToken | null =
+      await this.resetPasswordTokenRepository.findByValue(token);
+    if (!foundToken) {
+      throw new ApplicationError(404, 'Token not found');
+    }
+    const user: User = await this.userRepository.findById(foundToken.user.id);
+    user.password = await hashPassword(password);
+    await this.userRepository.save(user);
+  }
 }
