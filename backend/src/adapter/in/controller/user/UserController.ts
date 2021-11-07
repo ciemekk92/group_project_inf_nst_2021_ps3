@@ -9,6 +9,7 @@ import { catchAsyncErrors } from '../../../../middleware/GlobalErrorHandlerMiddl
 import validator from 'validator';
 import { AuthData } from '../../../../domain/user/AuthData';
 import { getCookieOptions } from '../auth/JwtAuthController';
+import { ResetPasswordDto } from './ResetPasswordDto';
 import isUUID = validator.isUUID;
 
 export const router = express.Router();
@@ -36,6 +37,14 @@ router.put(
         .cookie('refreshToken', result.refreshToken, getCookieOptions())
         .json({ accessToken: result.accessToken });
     });
+  })
+);
+
+router.put(
+  '/reset-password',
+  jsonValidatorMiddleware(ResetPasswordDto),
+  catchAsyncErrors(async (req: Request, res: Response) => {
+    return container.userService.resetPassword(req.body.email).then(() => res.status(204).send());
   })
 );
 

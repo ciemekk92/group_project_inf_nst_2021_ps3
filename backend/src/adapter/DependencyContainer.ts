@@ -7,6 +7,7 @@ import { SeqUserRepository } from './out/persistence/user/SeqUserRepository';
 import { AuthService } from '../domain/user/AuthService';
 import { SeqUserActivationTokenRepository } from './out/persistence/user/SeqUserActivationTokenRepository';
 import { NodemailerSender } from './out/NodemailerSender';
+import { SeqResetPasswordTokenRepository } from './out/persistence/user/SeqResetPasswordTokenRepository';
 
 class DependencyContainer {
   readonly issueService: IssueService;
@@ -33,7 +34,8 @@ export const container = new DependencyContainer(
   new UserService(
     new SeqUserRepository(),
     new SeqUserActivationTokenRepository(),
-    new NodemailerSender()
+    new NodemailerSender(),
+    new SeqResetPasswordTokenRepository()
   ),
   new AuthService(new SeqUserRepository())
 );

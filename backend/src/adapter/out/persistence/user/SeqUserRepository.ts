@@ -42,7 +42,7 @@ export class SeqUserRepository implements UserRepository {
       .then((u) => userToDomain(u));
   }
 
-  async findActiveByEmail(email: string): Promise<User | undefined> {
+  async findActiveByEmail(email: string): Promise<User | null> {
     return UserModel.findOne({
       where: {
         email: {
@@ -50,10 +50,10 @@ export class SeqUserRepository implements UserRepository {
         },
         active: true
       }
-    }).then((u) => (u ? userToDomain(u) : undefined));
+    }).then((u) => (u ? userToDomain(u) : null));
   }
 
-  async findById(id: UUID): Promise<User | undefined> {
+  async findById(id: UUID): Promise<User | null> {
     return UserModel.findByPk(id).then((u) => userToDomain(u));
   }
 }
