@@ -8,8 +8,9 @@ export const StyledButtonFilled = styled.button<Props>`
   background-color: ${(props) =>
     props.backgroundColor ? props.backgroundColor : props.theme.accent};
   border: none;
-  height: 3rem;
-  width: 12rem;
+  font-size: 1.8rem;
+  height: 3.6rem;
+  min-width: 20rem;
   padding: 0 0.5rem;
   border-radius: 3rem;
   color: ${(props) => props.theme.text};
