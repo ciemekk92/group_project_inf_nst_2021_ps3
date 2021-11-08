@@ -1,6 +1,6 @@
 import { UserActivationTokenRepository } from '../../../../domain/user/UserActivationTokenRepository';
 import { UserActivationToken } from '../../../../domain/user/UserActivationToken';
-import { UserActivationTokenModel } from './UserActivationTokenModel';
+import { UserActivationTokenModel } from './UserActivationToken.model';
 
 export class SeqUserActivationTokenRepository implements UserActivationTokenRepository {
   async save({ userId, value }: UserActivationToken): Promise<UserActivationToken> {

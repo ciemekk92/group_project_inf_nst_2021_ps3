@@ -1,6 +1,6 @@
 import { IssueRepository } from '../../../../domain/issue/IssueRepository';
 import { Issue } from '../../../../domain/issue/Issue';
-import { IssueModel } from './IssueModel';
+import { IssueModel } from './Issue.model';
 import { issueToDomain } from './IssueMapper';
 
 export class SeqIssueRepository implements IssueRepository {

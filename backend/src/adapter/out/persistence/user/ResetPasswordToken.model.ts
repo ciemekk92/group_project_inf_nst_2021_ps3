@@ -7,15 +7,15 @@ import {
   PrimaryKey,
   Table
 } from 'sequelize-typescript';
-import { UserModel } from './UserModel';
+import { UserModel } from './User.model';
 import { DataTypes } from 'sequelize';
 
-@Table
+@Table({ tableName: 'reset_password_token_model', underscored: true })
 export class ResetPasswordTokenModel extends Model {
   @PrimaryKey
   @AllowNull(false)
   @ForeignKey(() => UserModel)
-  @Column(DataTypes.UUIDV4)
+  @Column(DataTypes.UUID)
   userId: UUID;
 
   @BelongsTo(() => UserModel)

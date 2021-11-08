@@ -1,4 +1,4 @@
-import { ProjectModel } from './ProjectModel';
+import { ProjectModel } from './Project.model';
 import { Project } from '../../../../domain/project/Project';
 import { issueToDomain } from '../issue/IssueMapper';
 

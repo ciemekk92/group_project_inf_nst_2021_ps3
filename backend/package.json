@@ -28,10 +28,10 @@
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "nodemailer": "^6.7.0",
+    "pg": "^8.7.1",
     "reflect-metadata": "^0.1.13",
     "sequelize": "^6.7.0",
     "sequelize-typescript": "^2.1.1",
-    "sqlite3": "^5.0.2",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
