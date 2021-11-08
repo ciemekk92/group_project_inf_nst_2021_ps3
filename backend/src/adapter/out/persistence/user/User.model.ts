@@ -1,11 +1,11 @@
 import { AllowNull, Column, IsEmail, Length, Model, PrimaryKey, Table } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 
-@Table
+@Table({ tableName: 'user', underscored: true })
 export class UserModel extends Model {
   @PrimaryKey
   @AllowNull(false)
-  @Column(DataTypes.UUIDV4)
+  @Column(DataTypes.UUID)
   id: UUID;
 
   @Length({ min: 6, max: 64 })
@@ -24,15 +24,15 @@ export class UserModel extends Model {
 
   @AllowNull(true)
   @Column
-  firstName: string;
+  firstName?: string;
 
   @AllowNull(true)
   @Column
-  lastName: string;
+  lastName?: string;
 
   @AllowNull(true)
   @Column
-  displayName: string;
+  displayName?: string;
 
   @AllowNull(true)
   @Column

@@ -1,5 +1,5 @@
 import { User } from '../../../../domain/user/User';
-import { UserModel } from './UserModel';
+import { UserModel } from './User.model';
 
 export const userToDomain = (dbModel: UserModel): User => {
   return new User(

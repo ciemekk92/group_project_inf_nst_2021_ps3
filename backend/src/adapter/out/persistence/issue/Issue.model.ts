@@ -7,25 +7,25 @@ import {
   PrimaryKey,
   Table
 } from 'sequelize-typescript';
-import { ProjectModel } from '../project/ProjectModel';
+import { ProjectModel } from '../project/Project.model';
 import { DataTypes } from 'sequelize';
 
-@Table
+@Table({ tableName: 'issue', underscored: true })
 export class IssueModel extends Model {
   @PrimaryKey
   @AllowNull(false)
-  @Column(DataTypes.UUIDV4)
-  id!: UUID;
+  @Column(DataTypes.UUID)
+  id: UUID;
 
   @AllowNull(false)
   @Column
-  description!: string;
+  description: string;
 
   @AllowNull(false)
   @ForeignKey(() => ProjectModel)
-  @Column(DataTypes.UUIDV4)
-  projectId!: UUID;
+  @Column(DataTypes.UUID)
+  projectId: UUID;
 
   @BelongsTo(() => ProjectModel)
-  project!: ProjectModel;
+  project: ProjectModel;
 }

@@ -1,10 +1,10 @@
 import { ProjectRepository } from '../../../../domain/project/ProjectRepository';
 import { Project } from '../../../../domain/project/Project';
-import { ProjectModel } from './ProjectModel';
+import { ProjectModel } from './Project.model';
 import { CreateProjectCommand } from '../../../../domain/project/CreateProjectCommand';
 import { randomUUID } from 'crypto';
 import { projectToDomain } from './ProjectMapper';
-import { IssueModel } from '../issue/IssueModel';
+import { IssueModel } from '../issue/Issue.model';
 
 export class SeqProjectRepository implements ProjectRepository {
   async findAll(): Promise<Project[]> {

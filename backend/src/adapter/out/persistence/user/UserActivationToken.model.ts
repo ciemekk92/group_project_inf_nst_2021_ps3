@@ -1,6 +1,6 @@
 import { AllowNull, Column, Model, PrimaryKey, Table } from 'sequelize-typescript';
 
-@Table
+@Table({ tableName: 'user_activation_token_model', underscored: true })
 export class UserActivationTokenModel extends Model {
   @PrimaryKey
   @AllowNull(false)

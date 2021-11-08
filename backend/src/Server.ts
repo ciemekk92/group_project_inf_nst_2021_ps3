@@ -2,9 +2,9 @@ import express, { Application } from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import apiControllers from './adapter/ControllerRegistry';
-import { synchronizeDatabase } from './adapter/DatabaseSynchronizer';
 import { globalErrorHandlerMiddleware } from './middleware/GlobalErrorHandlerMiddleware';
 import { authMiddleware } from './middleware/AuthMiddleware';
+import sequelize from './config/SequelizeConfig';
 
 export const initServer = async (): Promise<Application> => {
   const app = express();
@@ -20,7 +20,7 @@ export const initServer = async (): Promise<Application> => {
   app.use('/api', apiControllers);
   app.use(globalErrorHandlerMiddleware);
 
-  synchronizeDatabase().then(() => console.log('Database synchronized.'));
+  await sequelize.sync().then(() => console.log('Connected to database'));
 
   return app;
 };
@@ -29,6 +29,6 @@ export const runServer = (app: Application) => {
   const port: number = parseInt(process.env.SERVER_PORT) || 8080;
 
   app.listen(port, () => {
-    console.log(`server started at http://localhost:${port}`);
+    console.log(`Server started at port ${port}`);
   });
 };

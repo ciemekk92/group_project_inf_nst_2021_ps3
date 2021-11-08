@@ -1,6 +1,6 @@
 import { UserRepository } from '../../../../domain/user/UserRepository';
 import { User } from '../../../../domain/user/User';
-import { UserModel } from './UserModel';
+import { UserModel } from './User.model';
 import { Op } from 'sequelize';
 import { userToDomain } from './UserMapper';
 
