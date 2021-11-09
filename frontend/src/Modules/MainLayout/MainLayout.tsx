@@ -1,6 +1,7 @@
 import React from 'react';
 import { Router, HashRouter, Route } from 'react-router-dom';
 import { history, Routes } from 'Routes';
+import { GlobalErrorBoundary } from 'Modules/GlobalErrorBoundary';
 import { LandingPage } from 'Modules/LandingPage';
 import { Login } from 'Modules/Login';
 import { Signup, SignupSuccess } from 'Modules/Signup';
@@ -8,7 +9,6 @@ import { ResetPassword } from 'Modules/ResetPassword';
 
 import { AppHeader, AppSidebar, AppMainWindow } from './components';
 import { LayoutWrapper, HorizontalWrapper } from './MainLayout.styled';
-import { GlobalErrorBoundary } from '../GlobalErrorBoundary/GlobalErrorBoundary';
 
 export const MainLayout = (): JSX.Element => {
   const [currentUser, setCurrentUser] = React.useState<boolean>(false);
