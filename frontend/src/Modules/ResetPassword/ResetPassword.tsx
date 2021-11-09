@@ -7,63 +7,49 @@ import { ButtonOutline } from 'Shared/ButtonOutline';
 import { StyledLink } from 'Shared/StyledLink';
 import { EMAIL_PATTERN } from 'Shared/constants';
 import { useLoading, Container } from 'Hooks/useLoading';
-import { history } from 'Routes/history';
+import { history } from 'Routes';
 import { updateObject } from 'Utils/updateObject';
 import { Api } from 'Utils/Api';
 
 import { ButtonsContainer, LoginWrapper } from 'Modules/Login/Login.styled';
 
-interface SignupData {
+interface ForgotPasswordData {
   email: string;
-  password: string;
-  confirmPassword: string;
 }
 
-export const Signup = (): JSX.Element => {
-  const initialData: SignupData = {
-    email: '',
-    password: '',
-    confirmPassword: ''
+export const ResetPassword = (): JSX.Element => {
+  const initialData: ForgotPasswordData = {
+    email: ''
   };
 
-  const [data, setData] = React.useState<SignupData>(initialData);
+  const [data, setData] = React.useState<ForgotPasswordData>(initialData);
   const { isLoading, startLoading, stopLoading } = useLoading();
+
+  const isResetButtonDisabled = !EMAIL_PATTERN.test(data.email) || data.email.length < 6;
 
   const onChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
     setData(updateObject(data, { [target.name]: target.value }));
   };
 
-  const handleSignup = async () => {
+  const handleResetPassword = async () => {
     startLoading();
-    const result = await Api.post('users', { email: data.email, password: data.password });
+    const result = await Api.put('reset-password', { email: data.email });
 
     stopLoading();
     if (result.status === 201) {
-      history.push('/signup-success');
+      history.push('/reset-password-success');
     } else {
       console.log(await result.json());
     }
   };
 
-  const isSignupButtonDisabled =
-    data.password.length <= 2 ||
-    data.password !== data.confirmPassword ||
-    !EMAIL_PATTERN.test(data.email);
-
   return (
     <LoginWrapper>
       <Container isLoading={isLoading} />
-      <Heading3>REJESTRACJA</Heading3>
+      <Heading3>RESETOWANIE HASŁA</Heading3>
       <TextInput name="email" placeholder="E-mail" onChange={onChange} />
-      <TextInput type="password" name="password" placeholder="Hasło" onChange={onChange} />
-      <TextInput
-        type="password"
-        name="confirmPassword"
-        placeholder="Potwierdź hasło"
-        onChange={onChange}
-      />
       <ButtonsContainer>
-        <ButtonFilled disabled={isSignupButtonDisabled} onClick={handleSignup}>
+        <ButtonFilled disabled={isResetButtonDisabled} onClick={handleResetPassword}>
           Zarejestruj się
         </ButtonFilled>
         <ButtonOutline>
