@@ -31,8 +31,6 @@ export const Login = ({ handleUserChange }: Props): JSX.Element => {
     setData(updateObject(data, { [target.name]: target.value }));
   };
 
-  const obj = {};
-
   return (
     <LoginWrapper>
       <Heading3>LOGOWANIE</Heading3>
@@ -45,7 +43,6 @@ export const Login = ({ handleUserChange }: Props): JSX.Element => {
           </StyledLink>
         </ButtonFilled>
         <ButtonOutline>
-          {obj}
           <StyledLink replace to={'/signup'}>
             Rejestracja
           </StyledLink>
