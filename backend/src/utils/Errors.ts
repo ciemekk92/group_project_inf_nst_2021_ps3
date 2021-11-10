@@ -1,4 +1,5 @@
 import validator from 'validator';
+import { ValidationMessage } from '../adapter/in/ValidationMessages';
 import isJSON = validator.isJSON;
 
 abstract class HttpError extends Error {
@@ -17,14 +18,16 @@ export class ApplicationError extends HttpError {
   }
 
   static fromValidation(status: number, errors: AppValidationError[]) {
-    return new ApplicationError(status, JSON.stringify(errors));
+    return new ApplicationError(status, JSON.stringify({ errors: [errors] }));
   }
 }
 
 export class AppValidationError {
-  message!: string;
+  message: ValidationMessage;
+  field: string;
 
-  constructor(message: string) {
+  constructor(message: ValidationMessage, field: string) {
     this.message = message;
+    this.field = field;
   }
 }

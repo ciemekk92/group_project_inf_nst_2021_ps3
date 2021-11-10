@@ -1,5 +1,6 @@
 import { AllowNull, Column, IsEmail, Length, Model, PrimaryKey, Table } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
+import { User } from '../../../../domain/user/User';
 
 @Table({ tableName: 'user', underscored: true })
 export class UserModel extends Model {
@@ -8,7 +9,7 @@ export class UserModel extends Model {
   @Column(DataTypes.UUID)
   id: UUID;
 
-  @Length({ min: 6, max: 64 })
+  @Length({ min: User.MIN_PASSWORD_LENGTH, max: User.MAX_PASSWORD_LENGTH })
   @AllowNull(false)
   @Column
   password: string;

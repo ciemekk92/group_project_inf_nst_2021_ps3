@@ -1,4 +1,7 @@
 export class User {
+  public static MIN_PASSWORD_LENGTH = 6;
+  public static MAX_PASSWORD_LENGTH = 64;
+
   id: UUID;
   password: string;
   email: string;
