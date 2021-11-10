@@ -11,6 +11,8 @@ import { AuthData } from '../../../../domain/user/AuthData';
 import { getCookieOptions } from '../auth/JwtAuthController';
 import { ResetPasswordDto } from './ResetPasswordDto';
 import { SetNewPasswordDto } from './SetNewPasswordDto';
+import { extractUserId } from '../JwtTokenExtractor';
+import { UserResponseDto } from './UserResponseDto';
 import isUUID = validator.isUUID;
 
 export const router = express.Router();
@@ -22,6 +24,17 @@ router.post(
   catchAsyncErrors(async (req: Request, res: Response) => {
     const userDto: UserDto = plainToClass(UserDto, req.body);
     return userService.save(userDto.email, userDto.password).then(() => res.status(201).send());
+  })
+);
+
+router.get(
+  '/me',
+  catchAsyncErrors(async (req: Request, res: Response) => {
+    return userService
+      .getByIdActive(extractUserId(req))
+      .then((u) =>
+        res.json(new UserResponseDto(u.id, u.email, u.firstName, u.lastName, u.displayName)).send()
+      );
   })
 );
 

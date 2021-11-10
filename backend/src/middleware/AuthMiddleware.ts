@@ -11,6 +11,14 @@ const permittedEndpoints = [
     method: 'PUT'
   },
   {
+    path: '/api/users/reset-password',
+    method: 'PUT'
+  },
+  {
+    path: '/api/users/set-new-password*',
+    method: 'PUT'
+  },
+  {
     path: '/api/auth/login',
     method: 'POST'
   }
@@ -25,7 +33,7 @@ const requestToPermittedEndpoint = (req: Request): boolean => {
     permittedEndpoints.find((endpoint) => {
       if (endpoint.path.endsWith('*')) {
         const withoutAsterisk: string = endpoint.path.slice(0, -1);
-        return endpoint.path.includes(withoutAsterisk);
+        return req.url.includes(withoutAsterisk);
       } else {
         return endpoint.path === req.url;
       }

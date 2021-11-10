@@ -25,7 +25,7 @@ export class SeqUserRepository implements UserRepository {
       foundUser.lastName = lastName;
       foundUser.displayName = displayName;
       foundUser.refreshToken = refreshToken;
-      return foundUser.save().then((u) => userToDomain(u));
+      return foundUser.save().then((u) => (u ? userToDomain(u) : null));
     }
 
     return new UserModel({
@@ -54,6 +54,15 @@ export class SeqUserRepository implements UserRepository {
   }
 
   async findById(id: UUID): Promise<User | null> {
-    return UserModel.findByPk(id).then((u) => userToDomain(u));
+    return UserModel.findByPk(id).then((u) => (u ? userToDomain(u) : null));
+  }
+
+  async findByIdActive(id: UUID): Promise<User | null> {
+    return UserModel.findOne({
+      where: {
+        id: id,
+        active: true
+      }
+    }).then((u) => (u ? userToDomain(u) : null));
   }
 }

@@ -83,4 +83,12 @@ export class UserService {
     user.password = await hashPassword(password);
     await this.userRepository.save(user);
   }
+
+  async getByIdActive(userId: UUID): Promise<User> {
+    const user: User | null = await this.userRepository.findByIdActive(userId);
+    if (!user) {
+      throw new ApplicationError(404, 'User not found');
+    }
+    return user;
+  }
 }
