@@ -1,5 +1,8 @@
 import React from 'react';
 
+import { history } from 'Routes/history';
+import { updateObject } from 'Utils/updateObject';
+import { Api } from 'Utils/Api';
 import { Heading3 } from 'Shared/Typography';
 import { TextInput } from 'Shared/TextInput';
 import { ButtonFilled } from 'Shared/ButtonFilled';
@@ -7,9 +10,6 @@ import { ButtonOutline } from 'Shared/ButtonOutline';
 import { StyledLink } from 'Shared/StyledLink';
 import { EMAIL_PATTERN } from 'Shared/constants';
 import { useLoading, Container } from 'Hooks/useLoading';
-import { history } from 'Routes/history';
-import { updateObject } from 'Utils/updateObject';
-import { Api } from 'Utils/Api';
 
 import { ButtonsContainer, LoginWrapper } from 'Modules/Login/Login.styled';
 

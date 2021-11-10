@@ -1,15 +1,15 @@
 import React from 'react';
 
+import { history } from 'Routes';
+import { updateObject } from 'Utils/updateObject';
+import { Api } from 'Utils/Api';
+import { useLoading, Container } from 'Hooks/useLoading';
 import { Heading3 } from 'Shared/Typography';
 import { TextInput } from 'Shared/TextInput';
 import { ButtonFilled } from 'Shared/ButtonFilled';
 import { ButtonOutline } from 'Shared/ButtonOutline';
 import { StyledLink } from 'Shared/StyledLink';
 import { EMAIL_PATTERN } from 'Shared/constants';
-import { useLoading, Container } from 'Hooks/useLoading';
-import { history } from 'Routes';
-import { updateObject } from 'Utils/updateObject';
-import { Api } from 'Utils/Api';
 
 import { ButtonsContainer, LoginWrapper } from 'Modules/Login/Login.styled';
 
@@ -33,10 +33,10 @@ export const ResetPassword = (): JSX.Element => {
 
   const handleResetPassword = async () => {
     startLoading();
-    const result = await Api.put('reset-password', { email: data.email });
+    const result = await Api.put('users/reset-password', { email: data.email });
 
     stopLoading();
-    if (result.status === 201) {
+    if (result.status === 204) {
       history.push('/reset-password-success');
     } else {
       console.log(await result.json());
@@ -50,7 +50,7 @@ export const ResetPassword = (): JSX.Element => {
       <TextInput name="email" placeholder="E-mail" onChange={onChange} />
       <ButtonsContainer>
         <ButtonFilled disabled={isResetButtonDisabled} onClick={handleResetPassword}>
-          Zarejestruj się
+          Zresetuj hasło
         </ButtonFilled>
         <ButtonOutline>
           <StyledLink replace to={'/'}>

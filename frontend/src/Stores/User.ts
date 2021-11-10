@@ -2,7 +2,8 @@ import { Action, Reducer } from 'redux';
 import { AppThunkAction } from './store';
 import { ActionTypes } from './constants';
 import { Api } from 'Utils/Api';
-import { isDefined } from '../Utils/isDefined';
+import { isDefined } from 'Utils/isDefined';
+import { UserModel } from 'Models/UserModel';
 
 export interface UserState {
   isLoading: boolean;
@@ -28,6 +29,11 @@ interface SetLoginInfoAction {
   accessToken: string;
 }
 
+interface SetLoadingAction {
+  type: typeof ActionTypes.SET_LOADING;
+  isLoading: boolean;
+}
+
 interface SetTokenAction {
   type: typeof ActionTypes.SET_TOKEN;
   accessToken: string;
@@ -37,7 +43,11 @@ interface SetLogoutAction {
   type: typeof ActionTypes.SET_LOGOUT;
 }
 
-export type UserActionTypes = SetLoginInfoAction | SetTokenAction | SetLogoutAction;
+export type UserActionTypes =
+  | SetLoginInfoAction
+  | SetLoadingAction
+  | SetTokenAction
+  | SetLogoutAction;
 
 export const actionCreators = {
   loginUser:
@@ -45,11 +55,30 @@ export const actionCreators = {
     async (dispatch, getState) => {
       const appState = getState();
 
+      await dispatch({
+        type: ActionTypes.SET_LOADING,
+        isLoading: true
+      });
+
       if (appState && appState.user) {
         const result = await Api.post('auth/login', { email, password });
 
         if (result) {
-          console.log(result);
+          const json = await result.json();
+
+          UserModel.currentUserSubject.next({
+            ...json
+          });
+
+          dispatch({
+            type: ActionTypes.SET_LOGIN_INFO,
+            accessToken: json.accessToken,
+            userInfo: { email: '123', displayName: '123', firstName: '123', lastName: '123' }
+          });
+
+          {
+            console.log({ current: UserModel.currentUserSubject.value.accessToken });
+          }
         }
       }
     }
@@ -80,8 +109,13 @@ export const reducer: Reducer<UserState> = (
     case ActionTypes.SET_LOGIN_INFO:
       return {
         userInfo: action.userInfo,
-        isLoading: true,
+        isLoading: false,
         accessToken: action.accessToken
+      };
+    case ActionTypes.SET_LOADING:
+      return {
+        ...state,
+        isLoading: action.isLoading
       };
   }
 

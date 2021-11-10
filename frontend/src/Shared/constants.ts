@@ -1,3 +1,8 @@
+export enum NOTIFICATION_TYPES {
+  SIGNUP = 'signup',
+  PASSWORD = 'password'
+}
+
 export enum ICON_SIZE {
   SMALL = 18,
   MEDIUM = 24,
