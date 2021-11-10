@@ -4,8 +4,11 @@ export const lightTheme = {
   accent: '#8bc34a',
   accentLight: '#9bcb64',
   text: '#242a32',
-  primaryTransparent: 'rgba(221, 221, 221, 0.6)',
-  secondaryTransparent: 'rgba(238, 238, 238, 0.6)'
+  loading: '#3a3f47',
+  disabled: '#666',
+  disabledText: '#ccc',
+  primaryTransparent: 'rgba(221,221,221,0.6)',
+  secondaryTransparent: 'rgba(238,238,238,0.6)'
 };
 
 export const darkTheme = {
@@ -14,6 +17,9 @@ export const darkTheme = {
   accent: '#8bc34a',
   accentLight: '#9bcb64',
   text: '#eee',
+  loading: '#ddd',
+  disabled: '#666',
+  disabledText: '#ccc',
   primaryTransparent: 'rgba(58, 63, 71, 0.6)',
   secondaryTransparent: 'rgba(36, 42, 50, 0.6)'
 };

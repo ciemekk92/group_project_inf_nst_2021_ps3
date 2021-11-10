@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { RouteComponentProps } from 'react-router';
 import { ButtonFilled } from 'Shared/ButtonFilled';
 import { ButtonOutline } from 'Shared/ButtonOutline';
@@ -41,8 +42,16 @@ export const Login = ({ handleUserChange }: Props): JSX.Element => {
             Zaloguj się
           </StyledLink>
         </ButtonFilled>
-        <ButtonOutline>Rejestracja</ButtonOutline>
-        <ButtonOutline>Zapomniałem hasła</ButtonOutline>
+        <ButtonOutline>
+          <StyledLink replace to={'/signup'}>
+            Rejestracja
+          </StyledLink>
+        </ButtonOutline>
+        <ButtonOutline>
+          <StyledLink replace to={'/reset-password'}>
+            Zapomniałem hasła
+          </StyledLink>
+        </ButtonOutline>
       </ButtonsContainer>
     </LoginWrapper>
   );

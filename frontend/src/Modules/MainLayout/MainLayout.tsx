@@ -1,13 +1,14 @@
 import React from 'react';
 import { Router, HashRouter, Route } from 'react-router-dom';
-
 import { history, Routes } from 'Routes';
-import { AppHeader, AppSidebar, AppMainWindow } from './components';
-import { LandingPage } from '../LandingPage';
-
-import { LayoutWrapper, HorizontalWrapper } from './MainLayout.styled';
+import { GlobalErrorBoundary } from 'Modules/GlobalErrorBoundary';
+import { LandingPage } from 'Modules/LandingPage';
 import { Login } from 'Modules/Login';
-import { Signup } from 'Modules/Signup';
+import { Signup, SignupSuccess } from 'Modules/Signup';
+import { ResetPassword } from 'Modules/ResetPassword';
+
+import { AppHeader, AppSidebar, AppMainWindow } from './components';
+import { LayoutWrapper, HorizontalWrapper } from './MainLayout.styled';
 
 export const MainLayout = (): JSX.Element => {
   const [currentUser, setCurrentUser] = React.useState<boolean>(false);
@@ -23,7 +24,9 @@ export const MainLayout = (): JSX.Element => {
             <HorizontalWrapper>
               <AppSidebar />
               <AppMainWindow>
-                <Routes {...props} handleUserChange={handleUserChange} />
+                <GlobalErrorBoundary>
+                  <Routes {...props} handleUserChange={handleUserChange} />
+                </GlobalErrorBoundary>
               </AppMainWindow>
             </HorizontalWrapper>
           </LayoutWrapper>
@@ -35,16 +38,20 @@ export const MainLayout = (): JSX.Element => {
   const renderLoggedOutView = () => (
     <HashRouter basename={'/'}>
       <Route
-        render={(props) => (
+        render={(_props) => (
           <LayoutWrapper>
             <AppHeader />
-            <Route exact path={'/'} render={(props) => <LandingPage />} />
-            <Route
-              exact
-              path={'/login'}
-              render={(props) => <Login {...props} handleUserChange={handleUserChange} />}
-            />
-            <Route exact path={'/signup'} render={(props) => <Signup />} />
+            <GlobalErrorBoundary>
+              <Route exact path={'/'} render={(_props) => <LandingPage />} />
+              <Route
+                exact
+                path={'/login'}
+                render={(props) => <Login {...props} handleUserChange={handleUserChange} />}
+              />
+              <Route exact path={'/signup'} render={(_props) => <Signup />} />
+              <Route exact path={'/signup-success'} render={(_props) => <SignupSuccess />} />
+              <Route exact path={'/reset-password'} render={(_props) => <ResetPassword />} />
+            </GlobalErrorBoundary>
           </LayoutWrapper>
         )}
       />

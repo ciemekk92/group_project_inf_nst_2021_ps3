@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const LoginWrapper = styled.div`
+  text-align: center;
   width: 60rem;
   display: flex;
   flex-direction: column;
@@ -12,8 +13,13 @@ export const LoginWrapper = styled.div`
   background-color: ${(props) => props.theme.primaryTransparent};
   transition: all 0.4s ease;
 
-  & h3 {
+  & h3,
+  h6 {
     margin: 5rem 0;
+  }
+
+  & h6 {
+    padding: 0 2rem;
   }
 
   & input {
