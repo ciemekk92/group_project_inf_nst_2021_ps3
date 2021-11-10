@@ -6,6 +6,9 @@ import { AuthData } from '../../../../domain/user/AuthData';
 import { ApplicationError } from '../../../../utils/Errors';
 import { extractUserId } from '../JwtTokenExtractor';
 import { catchAsyncErrors } from '../../../../middleware/GlobalErrorHandlerMiddleware';
+import { UserWithAuthData } from '../../../../domain/user/UserWithAuthData';
+import { UserResponseDto } from '../user/UserResponseDto';
+import { User } from '../../../../domain/user/User';
 
 const router = express.Router();
 
@@ -15,10 +18,13 @@ router.post(
   catchAsyncErrors(async (req: Request, res: Response) => {
     return container.authService
       .login(req.body.email, req.body.password)
-      .then((result: AuthData) => {
-        res
-          .cookie('refreshToken', result.refreshToken, getCookieOptions())
-          .json({ accessToken: result.accessToken });
+      .then((result: UserWithAuthData) => {
+        const u: User = result.user;
+
+        res.cookie('refreshToken', result.authData.refreshToken, getCookieOptions()).json({
+          accessToken: result.authData.accessToken,
+          userInfo: new UserResponseDto(u.id, u.email, u.firstName, u.lastName, u.displayName)
+        });
       });
   })
 );

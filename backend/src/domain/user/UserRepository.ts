@@ -6,4 +6,6 @@ export interface UserRepository {
   findActiveByEmail(email: string): Promise<User | null>;
 
   findById(id: UUID): Promise<User | null>;
+
+  findByIdActive(id: UUID): Promise<User | null>;
 }

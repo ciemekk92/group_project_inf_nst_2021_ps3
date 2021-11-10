@@ -5,6 +5,7 @@ import { UserRepository } from './UserRepository';
 import jwt, { Secret } from 'jsonwebtoken';
 
 import { ApplicationError } from '../../utils/Errors';
+import { UserWithAuthData } from './UserWithAuthData';
 
 export class AuthService {
   constructor(private userRepository: UserRepository) {}
@@ -36,13 +37,14 @@ export class AuthService {
     );
   }
 
-  async login(email: string, plainPassword: string): Promise<AuthData> {
+  async login(email: string, plainPassword: string): Promise<UserWithAuthData> {
     const user: User | undefined = await this.userRepository.findActiveByEmail(email);
     if (user && (await passwordMatches(plainPassword, user.password))) {
       const authData: AuthData = await AuthService.generateAuthData(user);
       user.refreshToken = authData.refreshToken;
       await this.userRepository.save(user);
-      return authData;
+
+      return new UserWithAuthData(authData, user);
     }
     throw new ApplicationError(401, 'Invalid credentials.');
   }
