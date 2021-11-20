@@ -13,6 +13,10 @@ export class ProjectModel extends Model {
   @Column
   name: string;
 
+  @AllowNull(false)
+  @Column
+  description: string;
+
   @HasMany(() => IssueModel)
   issues: IssueModel[] = [];
 }
