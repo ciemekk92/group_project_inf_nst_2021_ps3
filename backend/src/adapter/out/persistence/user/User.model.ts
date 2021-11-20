@@ -1,6 +1,17 @@
-import { AllowNull, Column, IsEmail, Length, Model, PrimaryKey, Table } from 'sequelize-typescript';
+import {
+  AllowNull,
+  BelongsToMany,
+  Column,
+  IsEmail,
+  Length,
+  Model,
+  PrimaryKey,
+  Table
+} from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { User } from '../../../../domain/user/User';
+import { ProjectModel } from '../project/Project.model';
+import { ProjectUserModel } from '../projectUser/ProjectUser.model';
 
 @Table({ tableName: 'user', underscored: true })
 export class UserModel extends Model {
@@ -38,4 +49,7 @@ export class UserModel extends Model {
   @AllowNull(true)
   @Column
   refreshToken?: string;
+
+  @BelongsToMany(() => ProjectModel, () => ProjectUserModel)
+  projects: Array<ProjectModel & { ProjectUser: ProjectUserModel }>;
 }
