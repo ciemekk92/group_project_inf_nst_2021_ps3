@@ -6,9 +6,10 @@ export class User {
   password: string;
   email: string;
   active: boolean;
-  firstName: string;
-  lastName: string;
   displayName: string;
+  profileImage: string;
+  firstName?: string;
+  lastName?: string;
   refreshToken?: string;
 
   constructor(
@@ -19,7 +20,8 @@ export class User {
     firstName?: string,
     lastName?: string,
     displayName?: string,
-    refreshToken?: string
+    refreshToken?: string,
+    profileImage?: string
   ) {
     this.id = id;
     this.password = password;
@@ -27,7 +29,8 @@ export class User {
     this.active = active;
     this.firstName = firstName;
     this.lastName = lastName;
-    this.displayName = displayName;
+    this.displayName = displayName == null ? email : displayName;
     this.refreshToken = refreshToken;
+    this.profileImage = profileImage;
   }
 }

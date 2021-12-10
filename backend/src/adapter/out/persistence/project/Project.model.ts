@@ -1,6 +1,16 @@
-import { AllowNull, Column, HasMany, Model, PrimaryKey, Table } from 'sequelize-typescript';
+import {
+  AllowNull,
+  BelongsToMany,
+  Column,
+  HasMany,
+  Model,
+  PrimaryKey,
+  Table
+} from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { IssueModel } from '../issue/Issue.model';
+import { UserModel } from '../user/User.model';
+import { ProjectUserModel } from '../projectUser/ProjectUser.model';
 
 @Table({ tableName: 'project', underscored: true })
 export class ProjectModel extends Model {
@@ -18,5 +28,8 @@ export class ProjectModel extends Model {
   description: string;
 
   @HasMany(() => IssueModel)
-  issues: IssueModel[] = [];
+  issues: IssueModel[];
+
+  @BelongsToMany(() => UserModel, () => ProjectUserModel)
+  users: UserModel[];
 }

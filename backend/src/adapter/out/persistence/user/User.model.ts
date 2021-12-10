@@ -42,14 +42,18 @@ export class UserModel extends Model {
   @Column
   lastName?: string;
 
-  @AllowNull(true)
+  @AllowNull(false)
   @Column
-  displayName?: string;
+  displayName: string;
 
   @AllowNull(true)
   @Column
   refreshToken?: string;
 
   @BelongsToMany(() => ProjectModel, () => ProjectUserModel)
-  projects: Array<ProjectModel & { ProjectUser: ProjectUserModel }>;
+  projects: ProjectModel[] = [];
+
+  @AllowNull(true)
+  @Column
+  profileImage?: string;
 }
