@@ -4,6 +4,9 @@ import { ActionTypes } from './constants';
 import { Api } from 'Utils/Api';
 import { isDefined } from 'Utils/isDefined';
 import { UserModel } from 'Models/UserModel';
+import { convertNullToEmptyString } from 'Utils/convertNullToEmptyString';
+import { history } from 'Routes';
+import { updateObject } from '../Utils/updateObject';
 
 export interface UserState {
   isLoading: boolean;
@@ -63,8 +66,9 @@ export const actionCreators = {
       if (appState && appState.user) {
         const result = await Api.post('auth/login', { email, password });
 
-        if (result) {
+        if (result.status === 200) {
           const json = await result.json();
+          const convertedJson = convertNullToEmptyString(json.userInfo) as unknown as UserInfo;
 
           UserModel.currentUserSubject.next({
             ...json
@@ -73,12 +77,10 @@ export const actionCreators = {
           dispatch({
             type: ActionTypes.SET_LOGIN_INFO,
             accessToken: json.accessToken,
-            userInfo: { email: '123', displayName: '123', firstName: '123', lastName: '123' }
+            userInfo: { ...convertedJson }
           });
 
-          {
-            console.log({ current: UserModel.currentUserSubject.value.accessToken });
-          }
+          history.push('/');
         }
       }
     }
@@ -108,7 +110,7 @@ export const reducer: Reducer<UserState> = (
   switch (action.type) {
     case ActionTypes.SET_LOGIN_INFO:
       return {
-        userInfo: action.userInfo,
+        userInfo: updateObject(state.userInfo, action.userInfo),
         isLoading: false,
         accessToken: action.accessToken
       };
@@ -117,7 +119,7 @@ export const reducer: Reducer<UserState> = (
         ...state,
         isLoading: action.isLoading
       };
+    default:
+      return state;
   }
-
-  return state;
 };
