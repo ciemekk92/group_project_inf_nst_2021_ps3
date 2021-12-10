@@ -37,7 +37,7 @@ export const UserActivation = ({ match }: Props): JSX.Element => {
         }
       });
     }
-  });
+  }, []);
 
   return isLoading ? (
     <Container isLoading={isLoading} />
