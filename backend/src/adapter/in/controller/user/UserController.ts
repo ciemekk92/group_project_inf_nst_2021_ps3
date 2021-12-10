@@ -11,7 +11,7 @@ import { AuthData } from '../../../../domain/user/AuthData';
 import { getCookieOptions } from '../auth/JwtAuthController';
 import { ResetPasswordDto } from './ResetPasswordDto';
 import { SetNewPasswordDto } from './SetNewPasswordDto';
-import { extractUserId } from '../JwtTokenExtractor';
+import { getUserIdFromSession } from '../JwtTokenExtractor';
 import { UserResponseDto } from './UserResponseDto';
 import isUUID = validator.isUUID;
 
@@ -31,7 +31,7 @@ router.get(
   '/me',
   catchAsyncErrors(async (req: Request, res: Response) => {
     return userService
-      .getByIdActive(extractUserId(req))
+      .getByIdActive(getUserIdFromSession(req))
       .then((u) =>
         res.json(new UserResponseDto(u.id, u.email, u.firstName, u.lastName, u.displayName)).send()
       );

@@ -4,7 +4,7 @@ import { jsonValidatorMiddleware } from '../../../../middleware/JsonValidatorMid
 import { CredentialsDto } from './CredentialsDto';
 import { AuthData } from '../../../../domain/user/AuthData';
 import { ApplicationError } from '../../../../utils/Errors';
-import { extractUserId } from '../JwtTokenExtractor';
+import { getUserIdFromSession } from '../JwtTokenExtractor';
 import { catchAsyncErrors } from '../../../../middleware/GlobalErrorHandlerMiddleware';
 import { UserWithAuthData } from '../../../../domain/user/UserWithAuthData';
 import { UserResponseDto } from '../user/UserResponseDto';
@@ -38,7 +38,7 @@ router.post(
     }
 
     return container.authService
-      .refresh(extractUserId(req), refreshToken)
+      .refresh(getUserIdFromSession(req), refreshToken)
       .then((result: AuthData) => {
         res
           .cookie('refreshToken', result.refreshToken, getCookieOptions())

@@ -57,6 +57,10 @@ export class SeqUserRepository implements UserRepository {
     return UserModel.findByPk(id).then((u) => (u ? userToDomain(u) : null));
   }
 
+  async findModelById(id: UUID): Promise<UserModel | null> {
+    return UserModel.findByPk(id);
+  }
+
   async findByIdActive(id: UUID): Promise<User | null> {
     return UserModel.findOne({
       where: {

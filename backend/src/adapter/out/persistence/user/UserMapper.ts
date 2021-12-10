@@ -10,6 +10,7 @@ export const userToDomain = (dbModel: UserModel): User => {
     dbModel.firstName,
     dbModel.lastName,
     dbModel.displayName,
-    dbModel.refreshToken
+    dbModel.refreshToken,
+    dbModel.profileImage
   );
 };
