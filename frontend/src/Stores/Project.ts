@@ -7,6 +7,7 @@ import { Api } from 'Utils/Api';
 export interface ProjectState {
   isLoading: boolean;
   projects: Project[];
+  project: Project;
 }
 
 export interface Project {
@@ -29,12 +30,18 @@ interface SetProjectsAction {
   isLoading: boolean;
 }
 
+interface SetProjectAction {
+  type: typeof ActionTypes.SET_PROJECT;
+  project: Project;
+  isLoading: boolean;
+}
+
 interface SetLoadingAction {
   type: typeof ActionTypes.SET_LOADING;
   isLoading: boolean;
 }
 
-export type ProjectActionTypes = SetProjectsAction | SetLoadingAction;
+export type ProjectActionTypes = SetProjectsAction | SetProjectAction | SetLoadingAction;
 
 export const actionCreators = {
   getProjects: (): AppThunkAction<ProjectActionTypes> => async (dispatch, getState) => {
@@ -58,12 +65,57 @@ export const actionCreators = {
         });
       }
     }
-  }
+  },
+  createProject:
+    (data: Project): AppThunkAction<ProjectActionTypes> =>
+    async (dispatch, getState) => {
+      const appState = getState();
+
+      await dispatch({
+        type: ActionTypes.SET_LOADING,
+        isLoading: true
+      });
+
+      if (appState && appState.project) {
+        const result = await Api.post('projects', data);
+
+        if (result.status === 201) {
+          await actionCreators.getProjects();
+        }
+      }
+    },
+  updateProject:
+    (data: Project): AppThunkAction<ProjectActionTypes> =>
+    async (dispatch, getState) => {
+      const appState = getState();
+
+      await dispatch({
+        type: ActionTypes.SET_LOADING,
+        isLoading: true
+      });
+
+      if (appState && appState.project) {
+        const result = await Api.put(`projects/${data.id}`, data);
+
+        if (result.status === 200) {
+          console.log('succ');
+        }
+      }
+    }
 };
 
 const initialState: ProjectState = {
   isLoading: false,
-  projects: []
+  projects: [],
+  project: {
+    id: '',
+    name: '',
+    description: '',
+    issues: [],
+    createdAt: '',
+    updatedAt: '',
+    users: []
+  }
 };
 
 export const reducer: Reducer<ProjectState> = (
@@ -79,7 +131,14 @@ export const reducer: Reducer<ProjectState> = (
   switch (action.type) {
     case ActionTypes.SET_PROJECTS:
       return {
+        ...state,
         projects: action.projects,
+        isLoading: false
+      };
+    case ActionTypes.SET_PROJECT:
+      return {
+        ...state,
+        project: action.project,
         isLoading: false
       };
     case ActionTypes.SET_LOADING:

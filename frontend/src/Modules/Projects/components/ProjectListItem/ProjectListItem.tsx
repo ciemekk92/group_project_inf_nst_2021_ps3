@@ -1,21 +1,28 @@
 import React from 'react';
+
 import { OptionsDropdown } from 'Shared/OptionsDropdown';
+import { UserSmallCircle } from 'Shared/UserSmallCircle';
+import { Project } from 'Stores/Project';
 import {
   DetailsContainer,
   ItemContainer,
   Label,
   UserCirclesContainer
 } from './ProjectListItem.styled';
-import { Project } from 'Stores/Project';
-import { UserSmallCircle } from '../../../../Shared/UserSmallCircle';
 
 interface Props {
   item: Project;
   handleEdit: (id: Id) => void;
   handleDelete: (id: Id) => void;
+  getDialogToggleProps: VoidFunctionNoArgs;
 }
 
-export const ProjectListItem = ({ item, handleEdit, handleDelete }: Props): JSX.Element => {
+export const ProjectListItem = ({
+  item,
+  handleEdit,
+  handleDelete,
+  getDialogToggleProps
+}: Props): JSX.Element => {
   const dropdownOptions = [
     {
       label: 'Edytuj',

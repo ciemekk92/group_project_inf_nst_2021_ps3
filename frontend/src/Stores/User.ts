@@ -1,12 +1,12 @@
 import { Action, Reducer } from 'redux';
-import { AppThunkAction } from './store';
-import { ActionTypes } from './constants';
 import { Api } from 'Utils/Api';
 import { isDefined } from 'Utils/isDefined';
-import { UserModel } from 'Models/UserModel';
+import { updateObject } from 'Utils/updateObject';
 import { convertNullToEmptyString } from 'Utils/convertNullToEmptyString';
+import { UserModel } from 'Models/UserModel';
 import { history } from 'Routes';
-import { updateObject } from '../Utils/updateObject';
+import { AppThunkAction } from './store';
+import { ActionTypes } from './constants';
 
 export interface UserState {
   isLoading: boolean;

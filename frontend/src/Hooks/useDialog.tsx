@@ -6,7 +6,7 @@ interface ToggleProps {
   onClick?: () => void;
 }
 
-interface ContainerProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface ContainerProps extends React.HTMLAttributes<HTMLDivElement> {
   onClick?: () => void;
   onKeyDown?: () => void;
 }
@@ -63,7 +63,6 @@ const DialogOverlay = styled.div`
 `;
 
 const DialogContent = styled.div`
-  width: 48rem;
   max-width: 100%;
   background-color: ${(props) => props.theme.primary};
   border-radius: 0.5rem;

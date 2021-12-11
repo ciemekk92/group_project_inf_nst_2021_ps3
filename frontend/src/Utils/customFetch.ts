@@ -9,7 +9,6 @@ export const customFetch = async (url: string, init: RequestInit): Promise<Unres
         ? process.env.REACT_APP_API_URL_DEV
         : process.env.REACT_APP_API_URL_PROD;
 
-    console.log(token);
     return await fetch(
       `${baseUrl}/${url}`,
       !token
