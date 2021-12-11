@@ -37,6 +37,30 @@ router.get(
   })
 );
 
+router.get(
+  '/:id',
+  catchAsyncErrors(async (req: Request, res: Response) => {
+    const id = req.params.id;
+    if (!isUUID(id, 4)) {
+      throw new ApplicationError(400, 'Id is not UUID');
+    }
+
+    return projectService.findById(id as UUID).then((p: Project) =>
+      res.json(
+        new ProjectResponseDto(
+          p.id,
+          p.name,
+          p.description,
+          p.issues,
+          p.createdAt,
+          p.users.map((u) => new ProjectUserResponseDto(u.id, u.displayName, u.profileImage)),
+          p.updatedAt
+        )
+      )
+    );
+  })
+);
+
 router.post(
   '/',
   jsonValidatorMiddleware(ProjectRequestDto),
