@@ -20,4 +20,12 @@ export class ProjectService {
     }
     return this.projectRepository.update(command);
   }
+
+  async findById(id: UUID): Promise<Project> {
+    const foundProject = await this.projectRepository.findById(id);
+    if (foundProject == null) {
+      throw new ApplicationError(404, 'Project not found');
+    }
+    return foundProject;
+  }
 }
