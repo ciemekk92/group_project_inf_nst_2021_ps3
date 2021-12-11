@@ -66,6 +66,30 @@ export const actionCreators = {
       }
     }
   },
+  getProject:
+    (id: Id): AppThunkAction<ProjectActionTypes> =>
+    async (dispatch, getState) => {
+      const appState = getState();
+
+      await dispatch({
+        type: ActionTypes.SET_LOADING,
+        isLoading: true
+      });
+
+      if (appState && appState.project) {
+        const result = await Api.get(`projects/${id}`);
+
+        if (result.status === 200) {
+          const json = await result.json();
+
+          dispatch({
+            type: ActionTypes.SET_PROJECT,
+            project: json,
+            isLoading: false
+          });
+        }
+      }
+    },
   createProject:
     (data: Project): AppThunkAction<ProjectActionTypes> =>
     async (dispatch, getState) => {

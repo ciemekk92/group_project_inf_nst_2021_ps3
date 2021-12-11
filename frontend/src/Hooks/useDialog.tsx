@@ -72,12 +72,12 @@ const DialogContent = styled.div`
 export const Container = (props: React.HTMLAttributes<HTMLDivElement>): JSX.Element => {
   const ref = React.useRef<HTMLDivElement>(null);
 
-  React.useEffect(() => {
-    if (!ref.current) {
-      return;
-    }
-    ref.current.focus();
-  });
+  // React.useEffect(() => {
+  //   if (!ref.current) {
+  //     return;
+  //   }
+  //   ref.current.focus();
+  // });
 
   return (
     <TopPortal>

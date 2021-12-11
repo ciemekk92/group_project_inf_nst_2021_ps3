@@ -18,3 +18,7 @@ export const DialogWrapper = styled.div`
     resize: none;
   }
 `;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+`;
