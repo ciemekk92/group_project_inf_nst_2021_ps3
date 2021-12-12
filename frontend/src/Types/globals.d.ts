@@ -1,4 +1,5 @@
 declare global {
+  export type Id = string;
   export type Unrestricted = any;
   export type Nullable<T> = null | T;
   export type Maybe<T> = null | undefined | T;

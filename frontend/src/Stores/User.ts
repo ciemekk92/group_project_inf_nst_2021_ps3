@@ -1,9 +1,12 @@
 import { Action, Reducer } from 'redux';
-import { AppThunkAction } from './store';
-import { ActionTypes } from './constants';
 import { Api } from 'Utils/Api';
 import { isDefined } from 'Utils/isDefined';
+import { updateObject } from 'Utils/updateObject';
+import { convertNullToEmptyString } from 'Utils/convertNullToEmptyString';
 import { UserModel } from 'Models/UserModel';
+import { history } from 'Routes';
+import { AppThunkAction } from './store';
+import { ActionTypes } from './constants';
 
 export interface UserState {
   isLoading: boolean;
@@ -27,6 +30,7 @@ interface SetLoginInfoAction {
   type: typeof ActionTypes.SET_LOGIN_INFO;
   userInfo: UserInfo;
   accessToken: string;
+  isLoading: boolean;
 }
 
 interface SetLoadingAction {
@@ -63,8 +67,9 @@ export const actionCreators = {
       if (appState && appState.user) {
         const result = await Api.post('auth/login', { email, password });
 
-        if (result) {
+        if (result.status === 200) {
           const json = await result.json();
+          const convertedJson = convertNullToEmptyString(json.userInfo) as unknown as UserInfo;
 
           UserModel.currentUserSubject.next({
             ...json
@@ -73,13 +78,17 @@ export const actionCreators = {
           dispatch({
             type: ActionTypes.SET_LOGIN_INFO,
             accessToken: json.accessToken,
-            userInfo: { email: '123', displayName: '123', firstName: '123', lastName: '123' }
+            userInfo: { ...convertedJson },
+            isLoading: false
           });
-
-          {
-            console.log({ current: UserModel.currentUserSubject.value.accessToken });
-          }
+        } else {
+          dispatch({
+            type: ActionTypes.SET_LOADING,
+            isLoading: false
+          });
         }
+
+        history.push('/');
       }
     }
 };
@@ -108,7 +117,7 @@ export const reducer: Reducer<UserState> = (
   switch (action.type) {
     case ActionTypes.SET_LOGIN_INFO:
       return {
-        userInfo: action.userInfo,
+        userInfo: updateObject(state.userInfo, action.userInfo),
         isLoading: false,
         accessToken: action.accessToken
       };
@@ -117,7 +126,7 @@ export const reducer: Reducer<UserState> = (
         ...state,
         isLoading: action.isLoading
       };
+    default:
+      return state;
   }
-
-  return state;
 };

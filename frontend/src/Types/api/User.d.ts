@@ -1,4 +1,4 @@
-export interface UserResponse {
+export interface UserResponse extends Response {
   accessToken: string;
   email: string;
   displayName: string;

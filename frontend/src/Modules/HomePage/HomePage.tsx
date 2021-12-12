@@ -14,7 +14,7 @@ export const HomePage = (): JSX.Element => {
           <Tile iconKey="event_note" label="Kalendarz" routePath="#" />
         </TilesRow>
         <TilesRow>
-          <Tile iconKey="layers" label="Projekty" routePath="#" />
+          <Tile iconKey="layers" label="Projekty" routePath="/projects" />
           <Tile iconKey="task" label="Zadania" routePath="#" />
           <Tile iconKey="account_circle" label="Profil" routePath="#" />
           <Tile iconKey="question_answer" label="Wiadomości" routePath="#" />

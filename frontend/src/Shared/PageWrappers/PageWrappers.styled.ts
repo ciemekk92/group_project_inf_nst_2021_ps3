@@ -1,10 +1,14 @@
 import styled from 'styled-components';
 
-export const VerticalPageWrapper = styled.div`
+interface WrapperProps {
+  readonly alignItems?: string;
+}
+
+export const VerticalPageWrapper = styled.div<WrapperProps>`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: ${(props) => (props.alignItems ? props.alignItems : 'center')};
   padding: 1rem;
 `;
 

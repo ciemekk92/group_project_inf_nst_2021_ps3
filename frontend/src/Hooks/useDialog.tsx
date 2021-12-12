@@ -6,7 +6,7 @@ interface ToggleProps {
   onClick?: () => void;
 }
 
-interface ContainerProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface ContainerProps extends React.HTMLAttributes<HTMLDivElement> {
   onClick?: () => void;
   onKeyDown?: () => void;
 }
@@ -63,7 +63,6 @@ const DialogOverlay = styled.div`
 `;
 
 const DialogContent = styled.div`
-  width: 48rem;
   max-width: 100%;
   background-color: ${(props) => props.theme.primary};
   border-radius: 0.5rem;
@@ -73,12 +72,12 @@ const DialogContent = styled.div`
 export const Container = (props: React.HTMLAttributes<HTMLDivElement>): JSX.Element => {
   const ref = React.useRef<HTMLDivElement>(null);
 
-  React.useEffect(() => {
-    if (!ref.current) {
-      return;
-    }
-    ref.current.focus();
-  });
+  // React.useEffect(() => {
+  //   if (!ref.current) {
+  //     return;
+  //   }
+  //   ref.current.focus();
+  // });
 
   return (
     <TopPortal>
