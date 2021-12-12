@@ -30,6 +30,7 @@ interface SetLoginInfoAction {
   type: typeof ActionTypes.SET_LOGIN_INFO;
   userInfo: UserInfo;
   accessToken: string;
+  isLoading: boolean;
 }
 
 interface SetLoadingAction {
@@ -77,11 +78,17 @@ export const actionCreators = {
           dispatch({
             type: ActionTypes.SET_LOGIN_INFO,
             accessToken: json.accessToken,
-            userInfo: { ...convertedJson }
+            userInfo: { ...convertedJson },
+            isLoading: false
           });
-
-          history.push('/');
+        } else {
+          dispatch({
+            type: ActionTypes.SET_LOADING,
+            isLoading: false
+          });
         }
+
+        history.push('/');
       }
     }
 };
