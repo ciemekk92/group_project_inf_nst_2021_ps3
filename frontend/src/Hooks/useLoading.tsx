@@ -43,13 +43,13 @@ interface ContainerProps extends React.HTMLAttributes<HTMLDivElement> {
 export const Container = ({ isLoading, ...props }: ContainerProps): JSX.Element | null => {
   const ref = React.useRef<HTMLDivElement>(null);
 
-  // React.useEffect(() => {
-  //   if (!ref.current) {
-  //     return;
-  //   }
-  //
-  //   ref.current.focus();
-  // });
+  React.useEffect(() => {
+    if (!ref.current) {
+      return;
+    }
+
+    ref.current.focus();
+  });
 
   return isLoading ? (
     <TopPortal>

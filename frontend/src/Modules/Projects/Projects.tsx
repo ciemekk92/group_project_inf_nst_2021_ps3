@@ -10,6 +10,7 @@ import { PROJECT_DIALOG_MODE } from './fixtures';
 import { ProjectDialog, ProjectListItem } from './components';
 import { ProjectsHeader, ProjectsListContainer, StyledContainer } from './Projects.styled';
 import Modal from '@mui/material/Modal';
+import { Container } from '../../Hooks/useLoading';
 
 export const Projects = (): JSX.Element => {
   const [mode, setMode] = React.useState<PROJECT_DIALOG_MODE>(PROJECT_DIALOG_MODE.ADD);
@@ -25,6 +26,7 @@ export const Projects = (): JSX.Element => {
 
   const dispatch = useDispatch();
   const projectsData = useSelector((state: ApplicationState) => state.project?.projects);
+  const isLoading = useSelector((state: ApplicationState) => state.project?.isLoading);
 
   React.useEffect(() => {
     dispatch(actionCreators.getProjects());
@@ -53,6 +55,7 @@ export const Projects = (): JSX.Element => {
 
   return (
     <React.Fragment>
+      <Container isLoading={isLoading!} />
       <StyledContainer>
         <VerticalPageWrapper>
           <ProjectsHeader>

@@ -21,7 +21,6 @@ interface Props {
 export const ProjectDialog = ({ handleClose, mode }: Props): JSX.Element => {
   const dispatch = useDispatch();
   const projectStoreData = useSelector((state: ApplicationState) => state.project?.project);
-  const isLoading = useSelector((state: ApplicationState) => state.project?.isLoading);
 
   const initialProjectData: Project = {
     id: '',
