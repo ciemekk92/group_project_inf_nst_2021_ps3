@@ -6,23 +6,20 @@ import { Heading4 } from 'Shared/Typography';
 import { ButtonOutline } from 'Shared/ButtonOutline';
 import { actionCreators, Project } from 'Stores/Project';
 import { ApplicationState } from 'Stores/store';
-import { useDialog } from 'Hooks/useDialog';
 import { PROJECT_DIALOG_MODE } from './fixtures';
 import { ProjectDialog, ProjectListItem } from './components';
 import { ProjectsHeader, ProjectsListContainer, StyledContainer } from './Projects.styled';
+import Modal from '@mui/material/Modal';
 
 export const Projects = (): JSX.Element => {
-  const [projectId, setProjectId] = React.useState<Id>('');
   const [mode, setMode] = React.useState<PROJECT_DIALOG_MODE>(PROJECT_DIALOG_MODE.ADD);
-  const { isOpen, handleOpen, handleClose, getToggleProps, getContainerProps } = useDialog();
+  const [show, setShow] = React.useState<boolean>(false);
+
+  const handleOpen = () => setShow(true);
+
+  const handleClose = () => setShow(false);
 
   const handleAddingProject = () => {};
-
-  const handleEditingProject = (id: Id) => {
-    setProjectId(id);
-    setMode(PROJECT_DIALOG_MODE.EDIT);
-    handleOpen();
-  };
 
   const handleDeletingProject = (id: Id) => {};
 
@@ -33,13 +30,18 @@ export const Projects = (): JSX.Element => {
     dispatch(actionCreators.getProjects());
   }, []);
 
+  const handleEditingProject = async (id: Id) => {
+    setMode(PROJECT_DIALOG_MODE.EDIT);
+    await dispatch(actionCreators.getProject(id));
+    handleOpen();
+  };
+
   const renderProjectList = () => {
     if (projectsData) {
       return projectsData.map((project: Project) => (
         <ProjectListItem
           key={project.id}
           item={project}
-          getDialogToggleProps={getToggleProps}
           handleEdit={handleEditingProject}
           handleDelete={handleDeletingProject}
         />
@@ -50,22 +52,19 @@ export const Projects = (): JSX.Element => {
   };
 
   return (
-    <StyledContainer>
-      <VerticalPageWrapper>
-        <ProjectsHeader>
-          <Heading4>Projekty</Heading4>
-          <ButtonOutline onClick={handleAddingProject}>Dodaj nowy projekt</ButtonOutline>
-        </ProjectsHeader>
-        <ProjectsListContainer>{renderProjectList()}</ProjectsListContainer>
-      </VerticalPageWrapper>
-      {isOpen && (
-        <ProjectDialog
-          projectId={projectId}
-          mode={mode}
-          handleClose={handleClose}
-          getContainerProps={getContainerProps}
-        />
-      )}
-    </StyledContainer>
+    <React.Fragment>
+      <StyledContainer>
+        <VerticalPageWrapper>
+          <ProjectsHeader>
+            <Heading4>Projekty</Heading4>
+            <ButtonOutline onClick={handleAddingProject}>Dodaj nowy projekt</ButtonOutline>
+          </ProjectsHeader>
+          <ProjectsListContainer>{renderProjectList()}</ProjectsListContainer>
+        </VerticalPageWrapper>
+      </StyledContainer>
+      <Modal open={show} onClose={handleClose}>
+        <ProjectDialog mode={mode} handleClose={handleClose} />
+      </Modal>
+    </React.Fragment>
   );
 };

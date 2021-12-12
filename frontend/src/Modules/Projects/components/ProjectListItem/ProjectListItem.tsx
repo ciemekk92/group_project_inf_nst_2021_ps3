@@ -14,15 +14,9 @@ interface Props {
   item: Project;
   handleEdit: (id: Id) => void;
   handleDelete: (id: Id) => void;
-  getDialogToggleProps: VoidFunctionNoArgs;
 }
 
-export const ProjectListItem = ({
-  item,
-  handleEdit,
-  handleDelete,
-  getDialogToggleProps
-}: Props): JSX.Element => {
+export const ProjectListItem = ({ item, handleEdit, handleDelete }: Props): JSX.Element => {
   const dropdownOptions = [
     {
       label: 'Edytuj',
