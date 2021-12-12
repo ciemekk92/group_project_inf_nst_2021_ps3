@@ -1,6 +1,8 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import Modal from '@mui/material/Modal';
 
+import { Container } from 'Hooks/useLoading';
 import { VerticalPageWrapper } from 'Shared/PageWrappers';
 import { Heading4 } from 'Shared/Typography';
 import { ButtonOutline } from 'Shared/ButtonOutline';
@@ -9,8 +11,6 @@ import { ApplicationState } from 'Stores/store';
 import { PROJECT_DIALOG_MODE } from './fixtures';
 import { ProjectDialog, ProjectListItem } from './components';
 import { ProjectsHeader, ProjectsListContainer, StyledContainer } from './Projects.styled';
-import Modal from '@mui/material/Modal';
-import { Container } from '../../Hooks/useLoading';
 
 export const Projects = (): JSX.Element => {
   const [mode, setMode] = React.useState<PROJECT_DIALOG_MODE>(PROJECT_DIALOG_MODE.ADD);
