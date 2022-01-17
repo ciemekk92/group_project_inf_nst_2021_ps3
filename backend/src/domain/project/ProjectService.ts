@@ -23,9 +23,18 @@ export class ProjectService {
 
   async findById(id: UUID): Promise<Project> {
     const foundProject = await this.projectRepository.findById(id);
-    if (foundProject == null) {
+    if (!foundProject) {
       throw new ApplicationError(404, 'Project not found');
     }
     return foundProject;
+  }
+
+  async delete(id: UUID): Promise<void> {
+    const foundProject = await this.projectRepository.findById(id);
+    if (!foundProject) {
+      throw new ApplicationError(404, 'Project not found');
+    }
+
+    return this.projectRepository.delete(id);
   }
 }

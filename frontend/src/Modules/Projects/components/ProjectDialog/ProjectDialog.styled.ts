@@ -26,4 +26,7 @@ export const DialogWrapper = styled.div`
 
 export const ButtonContainer = styled.div`
   display: flex;
+  margin: 0 auto;
+  width: 80%;
+  justify-content: space-between;
 `;

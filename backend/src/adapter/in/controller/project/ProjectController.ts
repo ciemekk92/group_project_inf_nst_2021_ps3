@@ -114,4 +114,19 @@ router.put(
   })
 );
 
+router.delete(
+  '/:id',
+  catchAsyncErrors(async (req: Request, res: Response) => {
+    const id = req.params.id;
+
+    if (!isUUID(id, 4)) {
+      throw new ApplicationError(400, 'Id is not UUID');
+    }
+
+    return projectService.delete(id as UUID).then(() => {
+      res.status(204).json();
+    });
+  })
+);
+
 export default router;

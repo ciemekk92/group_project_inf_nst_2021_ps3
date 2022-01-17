@@ -16,6 +16,7 @@ import { ButtonContainer, DialogWrapper } from './ProjectDialog.styled';
 interface Props {
   handleClose: VoidFunctionNoArgs;
   mode: PROJECT_DIALOG_MODE;
+  ref?: React.Ref<Unrestricted>;
 }
 
 export const ProjectDialog = ({ handleClose, mode }: Props): JSX.Element => {
@@ -33,7 +34,7 @@ export const ProjectDialog = ({ handleClose, mode }: Props): JSX.Element => {
   };
 
   const [projectData, setProjectData] = React.useState<Project>(
-    projectStoreData ? projectStoreData : initialProjectData
+    mode === PROJECT_DIALOG_MODE.EDIT && projectStoreData ? projectStoreData : initialProjectData
   );
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -57,6 +58,9 @@ export const ProjectDialog = ({ handleClose, mode }: Props): JSX.Element => {
       if (mode === PROJECT_DIALOG_MODE.ADD) {
         await dispatch(actionCreators.createProject(projectData));
       }
+      setProjectData(initialProjectData);
+      await dispatch(actionCreators.getProjects());
+      handleClose();
     } catch (e) {
       console.log(e);
     }

@@ -9,4 +9,6 @@ export interface ProjectRepository {
   save(createProjectCommand: CreateProjectCommand): Promise<Project>;
 
   update(command: UpdateProjectCommand): Promise<Project>;
+
+  delete(id: UUID): Promise<void>;
 }

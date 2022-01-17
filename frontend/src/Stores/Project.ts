@@ -122,7 +122,31 @@ export const actionCreators = {
         const result = await Api.put(`projects/${data.id}`, data);
 
         if (result.status === 200) {
-          console.log('succ');
+          dispatch({
+            type: ActionTypes.SET_LOADING,
+            isLoading: false
+          });
+        }
+      }
+    },
+  deleteProject:
+    (id: Id): AppThunkAction<ProjectActionTypes> =>
+    async (dispatch, getState) => {
+      const appState = getState();
+
+      await dispatch({
+        type: ActionTypes.SET_LOADING,
+        isLoading: true
+      });
+
+      if (appState) {
+        const result = await Api.delete(`projects/${id}`);
+
+        if (result) {
+          dispatch({
+            type: ActionTypes.SET_LOADING,
+            isLoading: false
+          });
         }
       }
     }

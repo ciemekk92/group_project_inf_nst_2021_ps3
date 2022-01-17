@@ -59,4 +59,8 @@ export class SeqProjectRepository implements ProjectRepository {
       m ? projectToDomain(m) : null
     );
   }
+
+  async delete(id: UUID): Promise<void> {
+    return ProjectModel.findByPk(id).then((m) => (m ? m.destroy() : null))
+  }
 }

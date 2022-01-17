@@ -20,9 +20,14 @@ export const Projects = (): JSX.Element => {
 
   const handleClose = () => setShow(false);
 
-  const handleAddingProject = () => {};
+  const handleAddingProject = () => {
+    setMode(PROJECT_DIALOG_MODE.ADD);
+    handleOpen();
+  };
 
-  const handleDeletingProject = (id: Id) => {};
+  const handleDeletingProject = async (id: Id) => {
+    await dispatch(actionCreators.deleteProject(id));
+  };
 
   const dispatch = useDispatch();
   const projectsData = useSelector((state: ApplicationState) => state.project?.projects);
@@ -66,7 +71,9 @@ export const Projects = (): JSX.Element => {
         </VerticalPageWrapper>
       </StyledContainer>
       <Modal open={show} onClose={handleClose}>
-        <ProjectDialog mode={mode} handleClose={handleClose} />
+        <div>
+          <ProjectDialog mode={mode} handleClose={handleClose} />
+        </div>
       </Modal>
     </React.Fragment>
   );
