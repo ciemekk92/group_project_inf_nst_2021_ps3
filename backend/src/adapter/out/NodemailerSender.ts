@@ -8,7 +8,10 @@ export class NodemailerSender implements EmailSender {
 
   constructor() {
     this.sender = nodemailer.createTransport(nodemailerConfig);
-    this.sender.verify().then(() => console.log('Connected to email service'));
+    this.sender
+      .verify()
+      .then(() => console.log('Connected to email service'))
+      .catch(() => console.log('Cannot connect to email service'));
   }
 
   async sendEmail(email: Email): Promise<void> {
