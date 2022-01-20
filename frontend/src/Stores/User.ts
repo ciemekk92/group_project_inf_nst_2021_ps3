@@ -75,6 +75,8 @@ export const actionCreators = {
             ...json
           });
 
+          console.log({ json, convertedJson });
+
           dispatch({
             type: ActionTypes.SET_LOGIN_INFO,
             accessToken: json.accessToken,

@@ -38,7 +38,7 @@ export const Login = (): JSX.Element => {
   };
 
   const handleLogin = async () => {
-    dispatch(actionCreators.loginUser(data));
+    await dispatch(actionCreators.loginUser(data));
   };
 
   return (
