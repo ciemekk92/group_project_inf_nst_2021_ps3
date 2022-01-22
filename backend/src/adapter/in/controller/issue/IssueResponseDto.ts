@@ -1,19 +1,19 @@
-import { IssueType } from '../../adapter/out/persistence/issue/IssueType';
-import { IssueStatus } from '../../adapter/out/persistence/issue/IssueStatus';
+import { IssueType } from '../../../out/persistence/issue/IssueType';
+import { IssueStatus } from '../../../out/persistence/issue/IssueStatus';
 
-export class Issue {
+export class IssueResponseDto {
   id: UUID;
   description: string;
   projectId: UUID;
   type: IssueType;
   status: IssueStatus;
-  parentId: UUID;
   authorId: UUID;
-  assigneeId: UUID;
   timeSpentInHours: number;
   createdAt: Date;
-  timeEstimatedInHours?: number;
-  updatedAt?: Date;
+  assigneeId: UUID;
+  parentId?: UUID;
+  timeEstimatedInHours: number;
+  updatedAt: Date;
 
   constructor(
     id: UUID,
@@ -21,13 +21,13 @@ export class Issue {
     projectId: UUID,
     type: IssueType,
     status: IssueStatus,
-    parentId: UUID,
     authorId: UUID,
-    assigneeId: UUID,
     timeSpentInHours: number,
-    timeEstimatedInHours: number,
     createdAt: Date,
-    updatedAt: Date
+    assigneeId: UUID,
+    parentId?: UUID,
+    timeEstimatedInHours?: number,
+    updatedAt?: Date
   ) {
     this.id = id;
     this.description = description;

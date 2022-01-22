@@ -1,5 +1,4 @@
 import { IssueService } from '../domain/issue/IssueService';
-import { SeqIssueRepository } from './out/persistence/issue/SeqIssueRepository';
 import { ProjectService } from '../domain/project/ProjectService';
 import { SeqProjectRepository } from './out/persistence/project/SeqProjectModelRepository';
 import { UserService } from '../domain/user/UserService';
@@ -32,7 +31,7 @@ class DependencyContainer {
 const seqUserRepository = new SeqUserRepository();
 
 export const container = new DependencyContainer(
-  new IssueService(new SeqIssueRepository()),
+  new IssueService(),
   new ProjectService(new SeqProjectRepository(seqUserRepository, new SeqProjectUserRepository())),
   new UserService(
     seqUserRepository,
